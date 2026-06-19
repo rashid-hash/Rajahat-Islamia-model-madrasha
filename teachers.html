@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>শিক্ষক ও স্টাফ ডিরেক্টরি | রাজারহাট মডেল মাদ্রাসা</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { 
+            font-family: 'Hind Siliguri', sans-serif; 
+            background-color: #F8FAFC; 
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="pt-8 pb-16">
+
+    <div class="max-w-4xl mx-auto px-4 text-center mb-10 pt-8">
+        
+        <div class="inline-block relative">
+            <h2 class="text-4xl sm:text-5xl text-[#D4AF37] leading-relaxed drop-shadow-sm" style="font-family: 'Amiri', serif;">خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ</h2>
+            <p class="text-xs sm:text-sm text-gray-500 mt-2 font-semibold">"তোমাদের মধ্যে সর্বোত্তম সে, যে নিজে কুরআন শেখে এবং অন্যকে শেখায়"</p>
+            <p class="text-[10px] text-gray-400 mt-0.5">- সহীহ বুখারী: ৫০২৭ -</p>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#0B4A2B] mt-6 tracking-wide">শিক্ষক ও স্টাফ ডিরেক্টরি</h2>
+        <p class="text-sm text-gray-500 mt-2">আমাদের অভিজ্ঞ এবং নিবেদিতপ্রাণ শিক্ষক ও স্টাফমণ্ডলী</p>
+
+        <div class="flex justify-center items-center mt-5 gap-3 opacity-80">
+            <span class="w-16 sm:w-24 h-[1px] bg-gradient-to-r from-transparent to-[#D4AF37]"></span>
+            <i class="fa-solid fa-chalkboard-user text-[#D4AF37] text-lg hover:scale-110 transition-transform"></i>
+            <span class="w-16 sm:w-24 h-[1px] bg-gradient-to-l from-transparent to-[#D4AF37]"></span>
+        </div>
+    </div>
+
+    <div class="max-w-md mx-auto px-4 mb-12">
+        <div class="bg-white rounded-full shadow-sm border border-gray-100 p-2 flex justify-center items-center gap-2" id="type-filters">
+            <button class="type-btn bg-[#0B4A2B] text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-md whitespace-nowrap transition-all" data-type="all">সবাই</button>
+            <button class="type-btn bg-white text-gray-700 hover:bg-emerald-50 hover:text-[#0B4A2B] px-6 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap border border-transparent transition-all" data-type="teacher">শিক্ষক</button>
+            <button class="type-btn bg-white text-gray-700 hover:bg-emerald-50 hover:text-[#0B4A2B] px-6 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap border border-transparent transition-all" data-type="staff">স্টাফ</button>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[300px]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="teachers-container">
+            
+            <div id="loading-spinner" class="col-span-full flex flex-col items-center justify-center py-16 text-gray-400">
+                <i class="fa-solid fa-spinner fa-spin text-4xl mb-4 text-[#D4AF37]"></i>
+                <p class="text-lg font-semibold">তথ্য লোড করা হচ্ছে...</p>
+                <p class="text-sm">ডেটাবেস থেকে তথ্য আসছে, দয়া করে অপেক্ষা করুন।</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+        // TODO: আপনার ফায়ারবেস প্রজেক্টের কনফিগারেশন এখানে বসান
+        const firebaseConfig = {
+            apiKey: "AIzaSyA5rw6zSgRauNURUOmiXiVs-foRYjRTBOo",
+  authDomain: "rajarhat-islamia-model-mad.firebaseapp.com",
+  projectId: "rajarhat-islamia-model-mad",
+  storageBucket: "rajarhat-islamia-model-mad.firebasestorage.app",
+  messagingSenderId: "563719183379",
+  appId: "1:563719183379:web:bb5d0f05eec1263b62b3e6",
+  measurementId: "G-1TSLJR0C4Q"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // DOM Elements
+        const teachersContainer = document.getElementById('teachers-container');
+        const typeBtns = document.querySelectorAll('.type-btn');
+
+        let activeType = 'all';
+        let allTeachers = {}; // ডেটাবেস থেকে আসা ডেটা এখানে সেভ হবে
+
+        const typeNamesBn = {
+            'teacher': 'শিক্ষক',
+            'staff': 'স্টাফ/কর্মচারী'
+        };
+
+        // 1. Fetch Data from Firebase Realtime Database
+        const teachersRef = ref(db, 'teachers');
+        onValue(teachersRef, (snapshot) => {
+            if (snapshot.exists()) {
+                allTeachers = snapshot.val();
+                renderCards(); // ডেটা পেলে কার্ডগুলো তৈরি করবে
+            } else {
+                teachersContainer.innerHTML = `
+                    <div class="col-span-full flex flex-col items-center justify-center py-16 text-gray-400">
+                        <i class="fa-solid fa-users-slash text-4xl mb-4 text-gray-300"></i>
+                        <p class="text-lg font-semibold">কোনো শিক্ষক বা স্টাফের তথ্য পাওয়া যায়নি।</p>
+                    </div>`;
+            }
+        });
+
+        // 2. Function to Render Dynamic Cards based on Filters
+        function renderCards() {
+            teachersContainer.innerHTML = ''; // আগের ডেটা মুছে ফেলবে
+            let hasVisibleCards = false;
+
+            // Object.keys দিয়ে রিভার্স লুপ (নতুন ডেটা আগে আসবে)
+            const keys = Object.keys(allTeachers).reverse();
+
+            keys.forEach(tId => {
+                const teacher = allTeachers[tId];
+                
+                // ফিল্টার চেকিং (সবাই, শিক্ষক নাকি স্টাফ)
+                if (activeType === 'all' || teacher.type === activeType) {
+                    hasVisibleCards = true;
+                    
+                    const typeColorClass = teacher.type === 'teacher' ? 'bg-[#0B4A2B] text-white' : 'bg-gray-600 text-white';
+                    
+                    // ইমেইল লজিক (যদি এডমিন ইমেইল না দেয়, তাহলে শুধু কল বাটন ফুল-উইডথ হবে)
+                    let contactButtonsHtml = '';
+                    if (teacher.email && teacher.email.trim() !== "") {
+                        contactButtonsHtml = `
+                            <div class="flex gap-2">
+                                <a href="tel:${teacher.phone}" class="flex-1 bg-[#0B4A2B]/10 text-[#0B4A2B] py-2.5 rounded-xl font-bold hover:bg-[#0B4A2B] hover:text-white transition-colors text-sm flex justify-center items-center gap-2 border border-[#0B4A2B]/20">
+                                    <i class="fa-solid fa-phone"></i> কল
+                                </a>
+                                <a href="mailto:${teacher.email}" class="flex-1 bg-[#D4AF37]/10 text-[#B8901F] py-2.5 rounded-xl font-bold hover:bg-[#D4AF37] hover:text-white transition-colors text-sm flex justify-center items-center gap-2 border border-[#D4AF37]/20">
+                                    <i class="fa-solid fa-envelope"></i> ইমেইল
+                                </a>
+                            </div>`;
+                    } else {
+                        contactButtonsHtml = `
+                            <a href="tel:${teacher.phone}" class="w-full bg-[#0B4A2B]/10 text-[#0B4A2B] py-2.5 rounded-xl font-bold hover:bg-[#0B4A2B] hover:text-white transition-colors text-sm flex justify-center items-center gap-2 border border-[#0B4A2B]/20">
+                                <i class="fa-solid fa-phone"></i> কল করুন
+                            </a>`;
+                    }
+
+                    // ডাইনামিক HTML কার্ড তৈরি
+                    const cardHtml = `
+                        <div class="bg-white rounded-3xl p-6 relative shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
+                            <div class="absolute top-0 right-0 ${typeColorClass} font-bold px-4 py-1.5 rounded-bl-2xl rounded-tr-3xl text-xs flex items-center gap-1 shadow-sm">
+                                ${typeNamesBn[teacher.type]}
+                            </div>
+                            
+                            <div class="w-24 h-24 mx-auto rounded-full border-4 border-amber-50 mb-4 overflow-hidden shadow-sm bg-gray-100">
+                                <img src="${teacher.photoUrl}" alt="${teacher.name}" class="w-full h-full object-cover" onerror="this.src='https://cdn-icons-png.flaticon.com/512/149/149071.png'">
+                            </div>
+                            
+                            <div class="text-center mb-6 flex-grow">
+                                <h3 class="text-lg font-bold text-gray-800">${teacher.name}</h3>
+                                <p class="text-[13px] text-[#0B4A2B] mt-1 font-bold">${teacher.designation}</p>
+                                <p class="text-[11px] text-gray-400 mt-1">আইডি/ইনডেক্স: ${tId}</p>
+                            </div>
+                            
+                            <div class="mt-auto pt-4 border-t border-gray-100">
+                                ${contactButtonsHtml}
+                            </div>
+                        </div>
+                    `;
+                    teachersContainer.insertAdjacentHTML('beforeend', cardHtml);
+                }
+            });
+
+            // যদি ফিল্টার করা ডেটায় কেউ না থাকে
+            if (!hasVisibleCards) {
+                teachersContainer.innerHTML = `
+                    <div class="col-span-full flex flex-col items-center justify-center py-16 text-gray-400">
+                        <i class="fa-solid fa-users-slash text-4xl mb-4 text-gray-300"></i>
+                        <p class="text-lg font-semibold">এই বিভাগে কোনো তথ্য পাওয়া যায়নি।</p>
+                    </div>`;
+            }
+        }
+
+        // 3. Filter Button Click Events
+        typeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                activeType = btn.getAttribute('data-type');
+                
+                // বাটন ডিজাইন আপডেট
+                typeBtns.forEach(b => {
+                    if(b.getAttribute('data-type') === activeType) {
+                        b.className = b.className.replace('bg-white text-gray-700', 'bg-[#0B4A2B] text-white');
+                        b.classList.add('shadow-md', 'font-bold');
+                        b.classList.remove('font-semibold');
+                    } else {
+                        b.className = b.className.replace('bg-[#0B4A2B] text-white', 'bg-white text-gray-700');
+                        b.classList.remove('shadow-md', 'font-bold');
+                        b.classList.add('font-semibold');
+                    }
+                });
+
+                renderCards(); // নতুন ফিল্টার অনুযায়ী কার্ড রি-রেন্ডার করবে
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>এডমিন লগইন ও প্যানেল | শিক্ষার্থী ও স্টাফ ডিরেক্টরি</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Hind Siliguri -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Hind Siliguri', sans-serif; background-color: #F1F5F9; }
+        .form-input { width: 100%; padding: 0.5rem 1rem; border: 1px solid #E2E8F0; border-radius: 0.5rem; outline: none; transition: all 0.3s; }
+        .form-input:focus { border-color: #0B4A2B; box-shadow: 0 0 0 2px rgba(11, 74, 43, 0.2); }
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #0B4A2B; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- LOGIN SECTION -->
+    <div id="login-section" class="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-[#0B4A2B] to-[#07331D]">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md border-t-4 border-[#D4AF37]">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-100 shadow-sm">
+                    <i class="fa-solid fa-user-lock text-3xl text-[#0B4A2B]"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">এডমিন লগইন</h2>
+                <p class="text-sm text-gray-500 mt-1">রাজারহাট মডেল মাদ্রাসা</p>
+            </div>
+            <form id="login-form" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">ইমেইল ঠিকানা</label>
+                    <div class="relative">
+                        <i class="fa-regular fa-envelope absolute left-3 top-3 text-gray-400"></i>
+                        <input type="email" id="login-email" placeholder="admin@example.com" class="form-input pl-10" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">পাসওয়ার্ড</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-lock absolute left-3 top-3 text-gray-400"></i>
+                        <input type="password" id="login-password" placeholder="••••••••" class="form-input pl-10" required>
+                    </div>
+                </div>
+                <p id="login-error" class="text-red-500 text-xs font-semibold text-center hidden">ইমেইল বা পাসওয়ার্ড ভুল হয়েছে!</p>
+                <button type="submit" id="login-btn" class="w-full bg-[#D4AF37] text-[#0B4A2B] py-3 rounded-lg font-bold hover:bg-yellow-500 transition shadow-md flex justify-center items-center gap-2">
+                    <span>লগইন করুন</span> <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- DASHBOARD SECTION -->
+    <div id="dashboard-section" class="hidden">
+        
+        <header class="bg-[#0B4A2B] text-white shadow-md sticky top-0 z-50">
+            <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-user-shield text-2xl text-[#D4AF37]"></i>
+                    <div>
+                        <h1 class="text-xl font-bold">এডমিন ড্যাশবোর্ড</h1>
+                        <p class="text-[11px] text-[#D4AF37]">শিক্ষার্থী ও স্টাফ ম্যানেজমেন্ট</p>
+                    </div>
+                </div>
+                <div>
+                    <button id="logout-btn" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg text-sm font-semibold transition border border-white/20 flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> <span class="hidden sm:inline">লগআউট</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row gap-8 items-start">
+            
+            <!-- ================= LEFT COLUMN: FORMS ================= -->
+            <div class="w-full lg:w-1/3 xl:w-1/4 space-y-6">
+                
+                <!-- 1. Add Student Form -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-emerald-50 px-6 py-4 border-b border-emerald-100 flex items-center gap-2">
+                        <i class="fa-solid fa-user-graduate text-[#0B4A2B]"></i>
+                        <h2 class="text-lg font-bold text-[#0B4A2B]">শিক্ষার্থী যুক্ত করুন</h2>
+                    </div>
+                    <form id="add-student-form" class="p-6 space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">শিক্ষার্থীর নাম *</label>
+                            <input type="text" id="stu-name" placeholder="যেমন: আব্দুল্লাহ" class="form-input text-sm" required>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">স্টুডেন্ট আইডি *</label>
+                                <input type="text" id="stu-id" placeholder="যেমন: 26001" class="form-input text-sm" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">ভেরিফাইড?</label>
+                                <select id="stu-verified" class="form-input text-sm">
+                                    <option value="no" selected>না</option>
+                                    <option value="yes">হ্যাঁ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">শ্রেণি *</label>
+                                <select id="stu-class" class="form-input text-sm" required>
+                                    <option value="" disabled selected>নির্বাচন...</option>
+                                    <option value="one">প্রথম</option>
+                                    <option value="two">দ্বিতীয়</option>
+                                    <option value="three">তৃতীয়</option>
+                                    <option value="four">চতুর্থ</option>
+                                    <option value="five">পঞ্চম</option>
+                                    <option value="six">ষষ্ঠ</option>
+                                    <option value="seven">সপ্তম</option>
+                                    <option value="eight">অষ্টম</option>
+                                    <option value="nine">নবম</option>
+                                    <option value="ten">দশম</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">শাখা</label>
+                                <select id="stu-section" class="form-input text-sm">
+                                    <option value="none">শাখা নেই</option>
+                                    <option value="padma">পদ্মা</option>
+                                    <option value="meghna">মেঘনা</option>
+                                    <option value="jamuna">যমুনা</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">ছবির লিংক (URL) *</label>
+                            <input type="url" id="stu-photo" placeholder="https://..." class="form-input text-sm" required>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">পিতার নাম *</label>
+                                <input type="text" id="stu-father" class="form-input text-sm" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">মাতার নাম *</label>
+                                <input type="text" id="stu-mother" class="form-input text-sm" required>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">ঠিকানা *</label>
+                                <input type="text" id="stu-address" class="form-input text-sm" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">মোবাইল *</label>
+                                <input type="tel" id="stu-phone" placeholder="017..." class="form-input text-sm" required>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex gap-2">
+                            <button type="button" id="stu-clear-btn" class="px-4 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition"><i class="fa-solid fa-rotate-right"></i></button>
+                            <button type="submit" id="stu-submit-btn" class="flex-1 bg-[#0B4A2B] text-white py-3 rounded-lg font-bold hover:bg-[#07331D] transition shadow-md flex justify-center items-center gap-2">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> সেভ করুন
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 2. Add Teacher/Staff Form -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-amber-50 px-6 py-4 border-b border-amber-100 flex items-center gap-2">
+                        <i class="fa-solid fa-user-tie text-[#0B4A2B]"></i>
+                        <h2 class="text-lg font-bold text-[#0B4A2B]">শিক্ষক ও স্টাফ যুক্ত করুন</h2>
+                    </div>
+                    <form id="add-teacher-form" class="p-6 space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">নাম *</label>
+                            <input type="text" id="tch-name" placeholder="যেমন: মো: শফিকুল ইসলাম" class="form-input text-sm" required>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">আইডি/ইনডেক্স *</label>
+                                <input type="text" id="tch-id" placeholder="যেমন: T-101" class="form-input text-sm" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">ধরন *</label>
+                                <select id="tch-type" class="form-input text-sm" required>
+                                    <option value="teacher">শিক্ষক</option>
+                                    <option value="staff">স্টাফ/কর্মচারী</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">পদবি/বিষয় *</label>
+                            <input type="text" id="tch-designation" placeholder="যেমন: সহকারী শিক্ষক (আরবি)" class="form-input text-sm" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">ছবির লিংক (URL) *</label>
+                            <input type="url" id="tch-photo" placeholder="https://..." class="form-input text-sm" required>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">মোবাইল *</label>
+                                <input type="tel" id="tch-phone" placeholder="017..." class="form-input text-sm" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">ইমেইল (ঐচ্ছিক)</label>
+                                <input type="email" id="tch-email" placeholder="email@" class="form-input text-sm">
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex gap-2">
+                            <button type="button" id="tch-clear-btn" class="px-4 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition"><i class="fa-solid fa-rotate-right"></i></button>
+                            <button type="submit" id="tch-submit-btn" class="flex-1 bg-[#D4AF37] text-[#0B4A2B] py-3 rounded-lg font-bold hover:bg-yellow-500 transition shadow-md flex justify-center items-center gap-2">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> সেভ করুন
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- ================= RIGHT COLUMN: TABLES ================= -->
+            <div class="w-full lg:w-2/3 xl:w-3/4 space-y-6">
+                
+                <!-- 1. Student Table -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-user-graduate text-[#D4AF37] text-xl"></i>
+                            <h2 class="text-lg font-bold text-gray-800">শিক্ষার্থী পরিচালনা</h2>
+                            <span id="stu-total-count" class="bg-emerald-100 text-[#0B4A2B] px-2 py-0.5 rounded-full text-xs font-bold ml-2">০ জন</span>
+                        </div>
+                        <div class="relative w-full sm:w-auto">
+                            <input type="text" id="stu-search-input" placeholder="নাম বা আইডি খুঁজুন..." class="w-full sm:w-64 text-sm px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-[#0B4A2B]">
+                            <i class="fa-solid fa-magnifying-glass absolute right-4 top-2.5 text-gray-400 text-sm"></i>
+                        </div>
+                    </div>
+                    <div id="stu-empty-state" class="p-10 text-center text-gray-400">
+                        <i class="fa-solid fa-database text-4xl mb-3 text-gray-300"></i>
+                        <p class="text-base font-semibold">শিক্ষার্থীর ডেটা লোড হচ্ছে...</p>
+                    </div>
+                    <div id="stu-table-container" class="overflow-x-auto p-0 hidden">
+                        <table class="w-full text-left border-collapse whitespace-nowrap">
+                            <thead>
+                                <tr class="bg-emerald-50 text-[#0B4A2B] text-sm border-b border-emerald-100">
+                                    <th class="py-3 px-6 font-bold">ছবি ও নাম</th>
+                                    <th class="py-3 px-6 font-bold">আইডি (S. ID)</th>
+                                    <th class="py-3 px-6 font-bold">শ্রেণি ও শাখা</th>
+                                    <th class="py-3 px-6 font-bold text-center">অ্যাকশন</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-students-list" class="text-sm divide-y divide-gray-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 2. Teacher/Staff Table -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-user-tie text-[#D4AF37] text-xl"></i>
+                            <h2 class="text-lg font-bold text-gray-800">শিক্ষক ও স্টাফ পরিচালনা</h2>
+                            <span id="tch-total-count" class="bg-amber-100 text-[#0B4A2B] px-2 py-0.5 rounded-full text-xs font-bold ml-2">০ জন</span>
+                        </div>
+                        <div class="relative w-full sm:w-auto">
+                            <input type="text" id="tch-search-input" placeholder="নাম বা আইডি খুঁজুন..." class="w-full sm:w-64 text-sm px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-[#D4AF37]">
+                            <i class="fa-solid fa-magnifying-glass absolute right-4 top-2.5 text-gray-400 text-sm"></i>
+                        </div>
+                    </div>
+                    <div id="tch-empty-state" class="p-10 text-center text-gray-400">
+                        <i class="fa-solid fa-database text-4xl mb-3 text-gray-300"></i>
+                        <p class="text-base font-semibold">শিক্ষক ও স্টাফের ডেটা লোড হচ্ছে...</p>
+                    </div>
+                    <div id="tch-table-container" class="overflow-x-auto p-0 hidden">
+                        <table class="w-full text-left border-collapse whitespace-nowrap">
+                            <thead>
+                                <tr class="bg-amber-50 text-[#0B4A2B] text-sm border-b border-amber-100">
+                                    <th class="py-3 px-6 font-bold">ছবি ও নাম</th>
+                                    <th class="py-3 px-6 font-bold">আইডি</th>
+                                    <th class="py-3 px-6 font-bold">পদবি ও ধরন</th>
+                                    <th class="py-3 px-6 font-bold text-center">অ্যাকশন</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-teachers-list" class="text-sm divide-y divide-gray-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- FIREBASE & LOGIC SCRIPTS -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getDatabase, ref, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+        // TODO: আপনার ফায়ারবেস কনফিগারেশন এখানে বসান
+        const firebaseConfig = {
+            apiKey: "AIzaSyA5rw6zSgRauNURUOmiXiVs-foRYjRTBOo",
+  authDomain: "rajarhat-islamia-model-mad.firebaseapp.com",
+  projectId: "rajarhat-islamia-model-mad",
+  storageBucket: "rajarhat-islamia-model-mad.firebasestorage.app",
+  messagingSenderId: "563719183379",
+  appId: "1:563719183379:web:bb5d0f05eec1263b62b3e6",
+  measurementId: "G-1TSLJR0C4Q"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
+
+        // Translations for UI
+        const classNamesBn = { 'one': 'প্রথম', 'two': 'দ্বিতীয়', 'three': 'তৃতীয়', 'four': 'চতুর্থ', 'five': 'পঞ্চম', 'six': 'ষষ্ঠ', 'seven': 'সপ্তম', 'eight': 'অষ্টম', 'nine': 'নবম', 'ten': 'দশম' };
+        const sectionNamesBn = { 'padma': 'পদ্মা', 'meghna': 'মেঘনা', 'jamuna': 'যমুনা', 'none': '' };
+        const typeNamesBn = { 'teacher': 'শিক্ষক', 'staff': 'স্টাফ' };
+
+        let currentStudentsData = {};
+        let currentTeachersData = {};
+
+        // --- AUTH LOGIC ---
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('dashboard-section').classList.remove('hidden');
+                fetchStudents();
+                fetchTeachers();
+            } else {
+                document.getElementById('login-section').classList.remove('hidden');
+                document.getElementById('dashboard-section').classList.add('hidden');
+            }
+        });
+
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-password').value;
+            const loginBtn = document.getElementById('login-btn');
+            
+            loginBtn.innerHTML = '<div class="loader"></div>';
+            loginBtn.disabled = true;
+            document.getElementById('login-error').classList.add('hidden');
+
+            signInWithEmailAndPassword(auth, email, pass).catch(() => {
+                document.getElementById('login-error').classList.remove('hidden');
+                loginBtn.innerHTML = '<span>লগইন করুন</span> <i class="fa-solid fa-arrow-right-to-bracket"></i>';
+                loginBtn.disabled = false;
+            });
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            if(confirm("লগআউট করতে চান?")) signOut(auth);
+        });
+
+        // ================= STUDENT LOGIC =================
+        document.getElementById('stu-clear-btn').addEventListener('click', () => {
+            document.getElementById('add-student-form').reset();
+            document.getElementById('stu-id').readOnly = false;
+            document.getElementById('stu-submit-btn').innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> সেভ করুন';
+        });
+
+        document.getElementById('add-student-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('stu-submit-btn');
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...';
+            submitBtn.disabled = true;
+
+            const sId = document.getElementById('stu-id').value.trim();
+            const data = {
+                name: document.getElementById('stu-name').value.trim(),
+                verified: document.getElementById('stu-verified').value,
+                class: document.getElementById('stu-class').value,
+                section: document.getElementById('stu-section').value,
+                photoUrl: document.getElementById('stu-photo').value.trim(),
+                fatherName: document.getElementById('stu-father').value.trim(),
+                motherName: document.getElementById('stu-mother').value.trim(),
+                address: document.getElementById('stu-address').value.trim(),
+                phone: document.getElementById('stu-phone').value.trim(),
+                timestamp: Date.now()
+            };
+
+            set(ref(db, 'students/' + sId), data).then(() => {
+                document.getElementById('stu-clear-btn').click();
+                submitBtn.disabled = false;
+                alert("শিক্ষার্থীর তথ্য সফলভাবে সেভ হয়েছে!");
+            });
+        });
+
+        function fetchStudents() {
+            onValue(ref(db, 'students'), (snapshot) => {
+                const emptyState = document.getElementById('stu-empty-state');
+                const tableContainer = document.getElementById('stu-table-container');
+                const list = document.getElementById('admin-students-list');
+                const totalCount = document.getElementById('stu-total-count');
+
+                if (snapshot.exists()) {
+                    emptyState.classList.add('hidden');
+                    tableContainer.classList.remove('hidden');
+                    list.innerHTML = '';
+                    currentStudentsData = snapshot.val();
+                    let count = 0;
+
+                    Object.keys(currentStudentsData).reverse().forEach(sId => {
+                        const stu = currentStudentsData[sId];
+                        count++;
+                        
+                        const vBadge = stu.verified === 'yes' ? `<i class="fa-solid fa-circle-check text-[#1877F2]"></i>` : '';
+                        const secBadge = stu.section !== 'none' ? `<span class="bg-amber-50 text-[#D4AF37] px-2 py-0.5 rounded text-xs font-bold ml-1">${sectionNamesBn[stu.section]}</span>` : '';
+
+                        list.innerHTML += `
+                            <tr class="hover:bg-gray-50 transition stu-row">
+                                <td class="py-3 px-6 flex items-center gap-3">
+                                    <img src="${stu.photoUrl}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/149/149071.png'" class="w-10 h-10 rounded-full object-cover border border-gray-200">
+                                    <div>
+                                        <p class="font-bold text-gray-800 stu-name-col">${stu.name} ${vBadge}</p>
+                                        <p class="text-[11px] text-gray-500">${stu.phone}</p>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-6 font-semibold text-[#0B4A2B] stu-id-col">${sId}</td>
+                                <td class="py-3 px-6"><span class="bg-emerald-50 text-[#0B4A2B] px-2 py-0.5 rounded text-xs font-bold">${classNamesBn[stu.class]}</span>${secBadge}</td>
+                                <td class="py-3 px-6 text-center">
+                                    <button class="stu-edit text-blue-500 bg-blue-50 p-1.5 rounded hover:bg-blue-500 hover:text-white mr-1" data-id="${sId}"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="stu-copy text-emerald-600 bg-emerald-50 p-1.5 rounded hover:bg-emerald-600 hover:text-white mr-1" data-id="${sId}"><i class="fa-solid fa-copy"></i></button>
+                                    <button class="stu-del text-red-500 bg-red-50 p-1.5 rounded hover:bg-red-500 hover:text-white" data-id="${sId}"><i class="fa-solid fa-trash-can"></i></button>
+                                </td>
+                            </tr>`;
+                    });
+                    totalCount.innerText = count + ' জন';
+                    attachStudentListeners();
+                } else {
+                    emptyState.classList.remove('hidden');
+                    emptyState.innerHTML = `<i class="fa-solid fa-users-slash text-4xl mb-3 text-gray-300"></i><p>কোনো শিক্ষার্থী নেই</p>`;
+                    tableContainer.classList.add('hidden');
+                    totalCount.innerText = '০ জন';
+                }
+            });
+        }
+
+        function attachStudentListeners() {
+            document.querySelectorAll('.stu-del').forEach(btn => btn.addEventListener('click', (e) => {
+                const id = e.currentTarget.getAttribute('data-id');
+                if(confirm(`স্টুডেন্ট আইডি: ${id} ডিলিট করবেন?`)) remove(ref(db, 'students/' + id));
+            }));
+            document.querySelectorAll('.stu-edit').forEach(btn => btn.addEventListener('click', (e) => {
+                const id = e.currentTarget.getAttribute('data-id');
+                populateStudentForm(id, currentStudentsData[id], false);
+            }));
+            document.querySelectorAll('.stu-copy').forEach(btn => btn.addEventListener('click', (e) => {
+                const id = e.currentTarget.getAttribute('data-id');
+                populateStudentForm(id, currentStudentsData[id], true);
+            }));
+        }
+
+        function populateStudentForm(id, data, isCopy) {
+            document.getElementById('stu-name').value = data.name;
+            document.getElementById('stu-verified').value = data.verified || 'no';
+            document.getElementById('stu-class').value = data.class;
+            document.getElementById('stu-section').value = data.section || 'none';
+            document.getElementById('stu-photo').value = data.photoUrl;
+            document.getElementById('stu-father').value = data.fatherName;
+            document.getElementById('stu-mother').value = data.motherName;
+            document.getElementById('stu-address').value = data.address;
+            document.getElementById('stu-phone').value = data.phone;
+
+            const idField = document.getElementById('stu-id');
+            const submitBtn = document.getElementById('stu-submit-btn');
+
+            if (isCopy) {
+                idField.value = ''; idField.readOnly = false; idField.focus();
+                submitBtn.innerHTML = '<i class="fa-solid fa-copy"></i> কপি সেভ করুন';
+            } else {
+                idField.value = id; idField.readOnly = true;
+                submitBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i> আপডেট করুন';
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('stu-search-input').addEventListener('keyup', (e) => {
+            const term = e.target.value.toLowerCase();
+            document.querySelectorAll('.stu-row').forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(term) ? '' : 'none';
+            });
+        });
+
+        // ================= TEACHER LOGIC =================
+        document.getElementById('tch-clear-btn').addEventListener('click', () => {
+            document.getElementById('add-teacher-form').reset();
+            document.getElementById('tch-id').readOnly = false;
+            document.getElementById('tch-submit-btn').innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> সেভ করুন';
+        });
+
+        document.getElementById('add-teacher-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('tch-submit-btn');
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...';
+            submitBtn.disabled = true;
+
+            const tId = document.getElementById('tch-id').value.trim();
+            const data = {
+                name: document.getElementById('tch-name').value.trim(),
+                type: document.getElementById('tch-type').value,
+                designation: document.getElementById('tch-designation').value.trim(),
+                photoUrl: document.getElementById('tch-photo').value.trim(),
+                phone: document.getElementById('tch-phone').value.trim(),
+                email: document.getElementById('tch-email').value.trim(),
+                timestamp: Date.now()
+            };
+
+            set(ref(db, 'teachers/' + tId), data).then(() => {
+                document.getElementById('tch-clear-btn').click();
+                submitBtn.disabled = false;
+                alert("শিক্ষক/স্টাফের তথ্য সফলভাবে সেভ হয়েছে!");
+            });
+        });
+
+        function fetchTeachers() {
+            onValue(ref(db, 'teachers'), (snapshot) => {
+                const emptyState = document.getElementById('tch-empty-state');
+                const tableContainer = document.getElementById('tch-table-container');
+                const list = document.getElementById('admin-teachers-list');
+                const totalCount = document.getElementById('tch-total-count');
+
+                if (snapshot.exists()) {
+                    emptyState.classList.add('hidden');
+                    tableContainer.classList.remove('hidden');
+                    list.innerHTML = '';
+                    currentTeachersData = snapshot.val();
+                    let count = 0;
+
+                    Object.keys(currentTeachersData).reverse().forEach(tId => {
+                        const tch = currentTeachersData[tId];
+                        count++;
+                        
+                        const typeBadgeClass = tch.type === 'teacher' ? 'bg-[#0B4A2B] text-white' : 'bg-gray-500 text-white';
+
+                        list.innerHTML += `
+                            <tr class="hover:bg-amber-50/50 transition tch-row">
+                                <td class="py-3 px-6 flex items-center gap-3">
+                                    <img src="${tch.photoUrl}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/149/149071.png'" class="w-10 h-10 rounded-full object-cover border border-gray-200">
+                                    <div>
+                                        <p class="font-bold text-gray-800 tch-name-col">${tch.name}</p>
+                                        <p class="text-[11px] text-gray-500">${tch.phone}</p>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-6 font-semibold text-[#D4AF37] tch-id-col">${tId}</td>
+                                <td class="py-3 px-6">
+                                    <p class="text-xs font-bold text-gray-700">${tch.designation}</p>
+                                    <span class="${typeBadgeClass} px-2 py-0.5 rounded text-[10px] font-bold">${typeNamesBn[tch.type]}</span>
+                                </td>
+                                <td class="py-3 px-6 text-center">
+                                    <button class="tch-edit text-blue-500 bg-blue-50 p-1.5 rounded hover:bg-blue-500 hover:text-white mr-1" data-id="${tId}"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="tch-copy text-amber-600 bg-amber-50 p-1.5 rounded hover:bg-amber-600 hover:text-white mr-1" data-id="${tId}"><i class="fa-solid fa-copy"></i></button>
+                                    <button class="tch-del text-red-500 bg-red-50 p-1.5 rounded hover:bg-red-500 hover:text-white" data-id="${tId}"><i class="fa-solid fa-trash-can"></i></button>
+                                </td>
+                            </tr>`;
+                    });
+                    totalCount.innerText = count + ' জন';
+                    attachTeacherListeners();
+                } else {
+                    emptyState.classList.remove('hidden');
+                    emptyState.innerHTML = `<i class="fa-solid fa-users-slash text-4xl mb-3 text-gray-300"></i><p>কোনো শিক্ষক/স্টাফ নেই</p>`;
+                    tableContainer.classList.add('hidden');
+                    totalCount.innerText = '০ জন';
+                }
+            });
+        }
+
+        function attachTeacherListeners() {
+            document.querySelectorAll('.tch-del').forEach(btn => btn.addEventListener('click', (e) => {
+                const id = e.currentTarget.getAttribute('data-id');
+                if(confirm(`আইডি: ${id} ডিলিট করবেন?`)) remove(ref(db, 'teachers/' + id));
+            }));
+            document.querySelectorAll('.tch-edit').forEach(btn => btn.addEventListener('click', (e) => {
+                const id = e.currentTarget.getAttribute('data-id');
+                populateTeacherForm(id, currentTeachersData[id], false);
+            }));
+            document.querySelectorAll('.tch-copy').forEach(btn => btn.addEventListener('click', (e) => {
+                const id = e.currentTarget.getAttribute('data-id');
+                populateTeacherForm(id, currentTeachersData[id], true);
+            }));
+        }
+
+        function populateTeacherForm(id, data, isCopy) {
+            document.getElementById('tch-name').value = data.name;
+            document.getElementById('tch-type').value = data.type;
+            document.getElementById('tch-designation').value = data.designation;
+            document.getElementById('tch-photo').value = data.photoUrl;
+            document.getElementById('tch-phone').value = data.phone;
+            document.getElementById('tch-email').value = data.email || '';
+
+            const idField = document.getElementById('tch-id');
+            const submitBtn = document.getElementById('tch-submit-btn');
+
+            if (isCopy) {
+                idField.value = ''; idField.readOnly = false; idField.focus();
+                submitBtn.innerHTML = '<i class="fa-solid fa-copy"></i> কপি সেভ করুন';
+            } else {
+                idField.value = id; idField.readOnly = true;
+                submitBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i> আপডেট করুন';
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('tch-search-input').addEventListener('keyup', (e) => {
+            const term = e.target.value.toLowerCase();
+            document.querySelectorAll('.tch-row').forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(term) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

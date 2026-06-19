@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>শিক্ষার্থী ডিরেক্টরি | রাজারহাট মডেল মাদ্রাসা</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Hind Siliguri & Amiri -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { 
+            font-family: 'Hind Siliguri', sans-serif; 
+            background-color: #F8FAFC; 
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="pt-8 pb-16">
+
+    <!-- Premium Title & Arabic Typography Section -->
+    <div class="max-w-4xl mx-auto px-4 text-center mb-10 pt-8">
+        
+        <!-- Arabic Calligraphy -->
+        <div class="inline-block relative">
+            <h2 class="text-4xl sm:text-5xl text-[#D4AF37] leading-relaxed drop-shadow-sm" style="font-family: 'Amiri', serif;">رَّبِّ زِدْنِي عِلْمًا</h2>
+            <p class="text-xs sm:text-sm text-gray-500 mt-2 font-semibold">"হে আমার রব, আমার জ্ঞান বৃদ্ধি করে দিন"</p>
+            <p class="text-[10px] text-gray-400 mt-0.5">- সূরা ত্বাহা: ১১৪ -</p>
+        </div>
+
+        <!-- Main Title -->
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#0B4A2B] mt-6 tracking-wide">শিক্ষার্থী ডিরেক্টরি</h2>
+        <p class="text-sm text-gray-500 mt-2">যেকোনো একটি শ্রেণি নির্বাচন করে বিস্তারিত তথ্য জানুন</p>
+
+        <!-- Premium Divider -->
+        <div class="flex justify-center items-center mt-5 gap-3 opacity-80">
+            <span class="w-16 sm:w-24 h-[1px] bg-gradient-to-r from-transparent to-[#D4AF37]"></span>
+            <i class="fa-solid fa-book-open-reader text-[#D4AF37] text-lg hover:scale-110 transition-transform"></i>
+            <span class="w-16 sm:w-24 h-[1px] bg-gradient-to-l from-transparent to-[#D4AF37]"></span>
+        </div>
+
+    </div>
+
+    <!-- Filter Buttons Section -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        
+        <!-- Main Class Filter (প্রথম থেকে দশম) -->
+        <div class="bg-white rounded-full shadow-sm border border-gray-100 p-2 flex flex-nowrap sm:flex-wrap justify-start sm:justify-center items-center gap-2 overflow-x-auto no-scrollbar" id="class-filters">
+            <button class="class-btn bg-[#0B4A2B] text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-md whitespace-nowrap min-w-[60px] transition-all" data-class="all">সব</button>
+            <button class="class-btn bg-white text-gray-700 hover:bg-emerald-50 hover:text-[#0B4A2B] px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap border border-transparent transition-all" data-class="one">প্রথম</button>
+            <button class="class-btn bg-white text-gray-700 hover:bg-emerald-50 hover:text-[#0B4A2B] px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap border border-transparent transition-all" data-class="two">দ্বিতীয়</button>
+            <button class="class-btn bg-white text-gray-700 hover:bg-emerald-50 hover:text-[#0B4A2B] px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap border border-transparent transition-all" data-class="three">তৃতীয়</button>
+            <button class="class-btn bg-white text-gray-700 hover:bg-emerald-50 hover:text-[#0B4A2B] px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap border border-transparent transition-all" data-class="four">চতুর্থ</button>
+            <button class="class-btn bg-white text-gray-700 hover:bg-emerald-50 hover:text-[#0B4A2B] px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap border border-transparent transition-all" data-class="five">পঞ্চম</button>
+            <button class="class-btn bg-white text-gray-700 hover:bg-emerald-50 hover:text-[#0B4A2B] px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap border border-transparent transition-all" data-class="six">ষষ্ঠ</button>
+            <button class="class-btn bg-white text-gray-700 hover:bg-emerald-50 hover:text-[#0B4A2B] px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap border border-transparent transition-all" data-class="seven">সপ্তম</button>
+            <button class="class-btn bg-white text-gray-700 hover:bg-emerald-50 hover:text-[#0B4A2B] px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap border border-transparent transition-all" data-class="eight">অষ্টম</button>
+            <button class="class-btn bg-white text-gray-700 hover:bg-emerald-50 hover:text-[#0B4A2B] px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap border border-transparent transition-all" data-class="nine">নবম</button>
+            <button class="class-btn bg-white text-gray-700 hover:bg-emerald-50 hover:text-[#0B4A2B] px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap border border-transparent transition-all" data-class="ten">দশম</button>
+        </div>
+
+        <!-- Sub-filter: Section (শাখা) -->
+        <div id="section-filter-container" class="mt-4 flex justify-start sm:justify-center items-center gap-3 overflow-x-auto no-scrollbar px-2 hidden transition-all duration-300">
+            <span class="text-[13px] font-bold text-[#0B4A2B] bg-emerald-50 px-3 py-1.5 rounded-md border border-emerald-100"><i class="fa-solid fa-layer-group mr-1"></i> শাখা:</span>
+            
+            <button class="section-btn bg-[#D4AF37] text-[#0B4A2B] px-5 py-1.5 rounded-full text-[13px] font-bold shadow-sm whitespace-nowrap border border-[#D4AF37] transition-all" data-section="all">সব শাখা</button>
+            <button class="section-btn bg-white text-gray-600 hover:bg-amber-50 hover:text-[#D4AF37] px-5 py-1.5 rounded-full text-[13px] font-semibold whitespace-nowrap border border-gray-200 transition-all" data-section="padma">পদ্মা</button>
+            <button class="section-btn bg-white text-gray-600 hover:bg-amber-50 hover:text-[#D4AF37] px-5 py-1.5 rounded-full text-[13px] font-semibold whitespace-nowrap border border-gray-200 transition-all" data-section="meghna">মেঘনা</button>
+            <button class="section-btn bg-white text-gray-600 hover:bg-amber-50 hover:text-[#D4AF37] px-5 py-1.5 rounded-full text-[13px] font-semibold whitespace-nowrap border border-gray-200 transition-all" data-section="jamuna">যমুনা</button>
+        </div>
+    </div>
+
+    <!-- Student Cards Grid (Empty state, waiting for Firebase data) -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[300px]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="students-container">
+            
+            <!-- Dynamic Data Placeholder -->
+            <div id="loading-spinner" class="col-span-full flex flex-col items-center justify-center py-16 text-gray-400">
+                <i class="fa-solid fa-spinner fa-spin text-4xl mb-4 text-[#D4AF37]"></i>
+                <p class="text-lg font-semibold">শিক্ষার্থীদের তথ্য লোড করা হচ্ছে...</p>
+                <p class="text-sm">ডেটাবেস থেকে তথ্য আসছে, দয়া করে অপেক্ষা করুন।</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Logic for Filtering -->
+    <!-- ==========================================
+         FIREBASE & DYNAMIC RENDERING LOGIC
+         ========================================== -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+        // TODO: আপনার ফায়ারবেস প্রজেক্টের কনফিগারেশন এখানে বসান
+        const firebaseConfig = {
+            apiKey: "AIzaSyA5rw6zSgRauNURUOmiXiVs-foRYjRTBOo",
+  authDomain: "rajarhat-islamia-model-mad.firebaseapp.com",
+  projectId: "rajarhat-islamia-model-mad",
+  storageBucket: "rajarhat-islamia-model-mad.firebasestorage.app",
+  messagingSenderId: "563719183379",
+  appId: "1:563719183379:web:bb5d0f05eec1263b62b3e6",
+  measurementId: "G-1TSLJR0C4Q"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // DOM Elements
+        const studentsContainer = document.getElementById('students-container');
+        const classBtns = document.querySelectorAll('.class-btn');
+        const sectionBtns = document.querySelectorAll('.section-btn');
+        const sectionContainer = document.getElementById('section-filter-container');
+
+        let activeClass = 'all';
+        let activeSection = 'all';
+        const classesWithSections = ['one', 'two', 'three', 'four', 'five'];
+        
+        let allStudents = {}; // ডেটাবেস থেকে আসা ডেটা এখানে সেভ হবে
+
+        // ডেটাবেসের ভ্যালুকে বাংলায় দেখানোর জন্য ম্যাপিং
+        const classNamesBn = {
+            'one': 'প্রথম', 'two': 'দ্বিতীয়', 'three': 'তৃতীয়', 'four': 'চতুর্থ',
+            'five': 'পঞ্চম', 'six': 'ষষ্ঠ', 'seven': 'সপ্তম', 'eight': 'অষ্টম',
+            'nine': 'নবম', 'ten': 'দশম'
+        };
+        const sectionNamesBn = {
+            'padma': 'পদ্মা', 'meghna': 'মেঘনা', 'jamuna': 'যমুনা', 'none': ''
+        };
+
+        // 1. Fetch Data from Firebase Realtime Database
+        const studentsRef = ref(db, 'students');
+        onValue(studentsRef, (snapshot) => {
+            if (snapshot.exists()) {
+                allStudents = snapshot.val();
+                renderCards(); // ডেটা পেলে কার্ডগুলো তৈরি করবে
+            } else {
+                studentsContainer.innerHTML = `
+                    <div class="col-span-full flex flex-col items-center justify-center py-16 text-gray-400">
+                        <i class="fa-solid fa-users-slash text-4xl mb-4 text-gray-300"></i>
+                        <p class="text-lg font-semibold">কোনো শিক্ষার্থীর তথ্য পাওয়া যায়নি।</p>
+                    </div>`;
+            }
+        });
+
+        // 2. Function to Render Dynamic Cards based on Filters
+        function renderCards() {
+            studentsContainer.innerHTML = ''; // আগের ডেটা মুছে ফেলবে
+            let hasVisibleCards = false;
+
+            for (const sId in allStudents) {
+                const student = allStudents[sId];
+                
+                // ফিল্টার চেকিং
+                const classMatch = (activeClass === 'all' || student.class === activeClass);
+                const sectionMatch = (activeSection === 'all' || student.section === activeSection || !classesWithSections.includes(activeClass));
+
+                if (classMatch && sectionMatch) {
+                    hasVisibleCards = true;
+                    
+                    // ভেরিফাইড ব্যাজ লজিক
+                    const verifiedHtml = student.verified === 'yes' ? `<i class="fa-solid fa-circle-check text-[#1877F2] text-[12px]"></i>` : '';
+                    
+                    // শাখা লজিক
+                    const sectionHtml = (classesWithSections.includes(student.class) && student.section !== 'none') 
+                                        ? ` | শাখা: ${sectionNamesBn[student.section]}` 
+                                        : '';
+
+                    // ডাইনামিক HTML কার্ড তৈরি
+                    const cardHtml = `
+                        <div class="bg-white rounded-3xl p-6 relative shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
+                            <!-- ID Badge -->
+                            <div class="absolute top-0 right-0 bg-[#0B4A2B] text-white font-bold px-4 py-1.5 rounded-bl-2xl rounded-tr-3xl text-xs flex items-center gap-1 shadow-sm">
+                                S. ID: ${sId}
+                            </div>
+                            
+                            <!-- Profile Photo -->
+                            <div class="w-20 h-20 mx-auto rounded-full border-4 border-emerald-50 mb-3 overflow-hidden shadow-sm bg-gray-100">
+                                <img src="${student.photoUrl}" alt="Student" class="w-full h-full object-cover" onerror="this.src='https://cdn-icons-png.flaticon.com/512/149/149071.png'">
+                            </div>
+                            
+                            <!-- Name & Class -->
+                            <div class="text-center mb-5">
+                                <h3 class="text-lg font-bold text-gray-800 flex justify-center items-center gap-1">
+                                    ${student.name} ${verifiedHtml}
+                                </h3>
+                                <p class="text-[12px] text-gray-500 mt-0.5 font-semibold">${classNamesBn[student.class]} শ্রেণি${sectionHtml}</p>
+                            </div>
+                            
+                            <!-- Information -->
+                            <div class="space-y-2 mb-6 text-[13px]">
+                                <div class="flex justify-between items-center bg-gray-50 rounded-xl px-3 py-2 border border-gray-100">
+                                    <span class="text-gray-500 flex items-center gap-2"><i class="fa-solid fa-user-tie text-[#0B4A2B] opacity-70"></i> পিতা:</span>
+                                    <span class="font-bold text-gray-800 truncate max-w-[130px]">${student.fatherName}</span>
+                                </div>
+                                <div class="flex justify-between items-center bg-gray-50 rounded-xl px-3 py-2 border border-gray-100">
+                                    <span class="text-gray-500 flex items-center gap-2"><i class="fa-solid fa-user text-[#0B4A2B] opacity-70"></i> মাতা:</span>
+                                    <span class="font-bold text-gray-800 truncate max-w-[130px]">${student.motherName}</span>
+                                </div>
+                                <div class="flex justify-between items-center bg-gray-50 rounded-xl px-3 py-2 border border-gray-100">
+                                    <span class="text-gray-500 flex items-center gap-2"><i class="fa-solid fa-location-dot text-[#D4AF37]"></i> ঠিকানা:</span>
+                                    <span class="font-bold text-gray-800 truncate max-w-[130px]">${student.address}</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Call Button (Clickable link) -->
+                            <a href="tel:${student.phone}" class="w-full bg-[#0B4A2B]/10 text-[#0B4A2B] py-2.5 rounded-2xl font-bold hover:bg-[#0B4A2B] hover:text-white transition-colors text-sm flex justify-center items-center gap-2 border border-[#0B4A2B]/20">
+                                <i class="fa-solid fa-phone-volume"></i> কল করুন
+                            </a>
+                        </div>
+                    `;
+                    // কার্ডটি কন্টেইনারে যুক্ত করা
+                    studentsContainer.insertAdjacentHTML('beforeend', cardHtml);
+                }
+            }
+
+            // যদি ফিল্টার করা ক্লাসে কোনো ছাত্র না থাকে
+            if (!hasVisibleCards) {
+                studentsContainer.innerHTML = `
+                    <div class="col-span-full flex flex-col items-center justify-center py-16 text-gray-400">
+                        <i class="fa-solid fa-users-slash text-4xl mb-4 text-gray-300"></i>
+                        <p class="text-lg font-semibold">এই শ্রেণি বা শাখায় এখনো কোনো শিক্ষার্থী যুক্ত করা হয়নি।</p>
+                    </div>`;
+            }
+        }
+
+        // 3. Button Styles Logic
+        function updateBtnStyles(btns, activeValue, activeBgClass, activeTextClass) {
+            btns.forEach(btn => {
+                const value = btn.getAttribute('data-class') || btn.getAttribute('data-section');
+                if (value === activeValue) {
+                    btn.className = btn.className.replace('bg-white text-gray-700', `${activeBgClass} ${activeTextClass}`);
+                    btn.className = btn.className.replace('bg-white text-gray-600', `${activeBgClass} ${activeTextClass}`);
+                    btn.classList.add('shadow-md', 'font-bold');
+                    btn.classList.remove('font-semibold');
+                } else {
+                    btn.className = btn.className.replace(`${activeBgClass} ${activeTextClass}`, 'bg-white text-gray-700');
+                    btn.className = btn.className.replace(`${activeBgClass} ${activeTextClass}`, 'bg-white text-gray-600');
+                    btn.classList.remove('shadow-md', 'font-bold');
+                    btn.classList.add('font-semibold');
+                }
+            });
+        }
+
+        // 4. Class Filter Click Events
+        classBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                activeClass = btn.getAttribute('data-class');
+                activeSection = 'all'; 
+
+                updateBtnStyles(classBtns, activeClass, 'bg-[#0B4A2B]', 'text-white');
+                updateBtnStyles(sectionBtns, 'all', 'bg-[#D4AF37]', 'text-[#0B4A2B]'); 
+
+                if (classesWithSections.includes(activeClass)) {
+                    sectionContainer.classList.remove('hidden');
+                } else {
+                    sectionContainer.classList.add('hidden');
+                }
+                
+                renderCards(); // নতুন ফিল্টার অনুযায়ী কার্ড রি-রেন্ডার করবে
+            });
+        });
+
+        // 5. Section Filter Click Events
+        sectionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                activeSection = btn.getAttribute('data-section');
+                updateBtnStyles(sectionBtns, activeSection, 'bg-[#D4AF37]', 'text-[#0B4A2B]');
+                renderCards(); // নতুন শাখা অনুযায়ী কার্ড রি-রেন্ডার করবে
+            });
+        });
+    </script>
+    <footer class="mt-12 py-6 border-t border-gray-100 text-center">
+        <p class="text-sm text-gray-400 font-noto">
+            © ২০২৬ রাজারহাট ইসলামিয়া মডেল মাদ্রাসা। সর্বস্বত্ব সংরক্ষিত। 
+            <a href="admin-dashboard.html" class="text-gray-300 hover:text-red-500 transition ml-2" title="Admin Login">
+                🔒
+            </a>
+            <p>কারিগরি সহযোগিতায়: <span class="text-[#D4AF37] font-semibold cursor-pointer hover:underline">Abdur Rashid</span></p>
+        </p>
+    </footer>
+</body>
+</html>
