@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>এডমিন লগইন ও প্যানেল | শিক্ষার্থী ও স্টাফ ডিরেক্টরি</title>
-    <!-- Tailwind CSS CDN -->
+    <title>সেন্ট্রাল এডমিন প্যানেল | রাজারহাট মডেল মাদ্রাসা</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Hind Siliguri -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -17,69 +14,50 @@
         .form-input:focus { border-color: #0B4A2B; box-shadow: 0 0 0 2px rgba(11, 74, 43, 0.2); }
         .loader { border: 3px solid #f3f3f3; border-top: 3px solid #0B4A2B; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* ডাইনামিক ট্যাব অ্যাক্টিভ কালার */
+        .tab-btn.active { background-color: #D4AF37; color: #0B4A2B; font-weight: 700; border-color: #D4AF37; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body class="text-gray-800">
 
-    <!-- LOGIN SECTION -->
-    <div id="login-section" class="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-[#0B4A2B] to-[#07331D]">
-        <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md border-t-4 border-[#D4AF37]">
-            <div class="text-center mb-8">
-                <div class="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-100 shadow-sm">
-                    <i class="fa-solid fa-user-lock text-3xl text-[#0B4A2B]"></i>
+    <header class="bg-[#0B4A2B] text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-shield-halved text-2xl text-[#D4AF37]"></i>
+                <div>
+                    <h1 class="text-xl font-bold">সেন্ট্রাল এডমিন প্যানেল</h1>
+                    <p class="text-[11px] text-[#D4AF37]"><i class="fa-solid fa-code mr-1"></i> ডেভেলপমেন্ট মোড (লগইন সাময়িকভাবে বন্ধ)</p>
                 </div>
-                <h2 class="text-2xl font-bold text-gray-800">এডমিন লগইন</h2>
-                <p class="text-sm text-gray-500 mt-1">রাজারহাট মডেল মাদ্রাসা</p>
             </div>
-            <form id="login-form" class="space-y-5">
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">ইমেইল ঠিকানা</label>
-                    <div class="relative">
-                        <i class="fa-regular fa-envelope absolute left-3 top-3 text-gray-400"></i>
-                        <input type="email" id="login-email" placeholder="admin@example.com" class="form-input pl-10" required>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">পাসওয়ার্ড</label>
-                    <div class="relative">
-                        <i class="fa-solid fa-lock absolute left-3 top-3 text-gray-400"></i>
-                        <input type="password" id="login-password" placeholder="••••••••" class="form-input pl-10" required>
-                    </div>
-                </div>
-                <p id="login-error" class="text-red-500 text-xs font-semibold text-center hidden">ইমেইল বা পাসওয়ার্ড ভুল হয়েছে!</p>
-                <button type="submit" id="login-btn" class="w-full bg-[#D4AF37] text-[#0B4A2B] py-3 rounded-lg font-bold hover:bg-yellow-500 transition shadow-md flex justify-center items-center gap-2">
-                    <span>লগইন করুন</span> <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                </button>
-            </form>
         </div>
-    </div>
+    </header>
 
-    <!-- DASHBOARD SECTION -->
-    <div id="dashboard-section" class="hidden">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <header class="bg-[#0B4A2B] text-white shadow-md sticky top-0 z-50">
-            <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-user-shield text-2xl text-[#D4AF37]"></i>
-                    <div>
-                        <h1 class="text-xl font-bold">এডমিন ড্যাশবোর্ড</h1>
-                        <p class="text-[11px] text-[#D4AF37]">শিক্ষার্থী ও স্টাফ ম্যানেজমেন্ট</p>
-                    </div>
-                </div>
-                <div>
-                    <button id="logout-btn" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg text-sm font-semibold transition border border-white/20 flex items-center gap-2">
-                        <i class="fa-solid fa-arrow-right-from-bracket"></i> <span class="hidden sm:inline">লগআউট</span>
-                    </button>
-                </div>
-            </div>
-        </header>
+        <div class="flex flex-wrap gap-3 mb-8 border-b border-gray-200 pb-4">
+            <button class="tab-btn active bg-white text-[#0B4A2B] border border-gray-300 px-6 py-2.5 rounded-full font-bold shadow-sm transition-all" data-target="students-tab">
+                <i class="fa-solid fa-user-graduate mr-2"></i> শিক্ষার্থী সেকশন
+            </button>
+            <button class="tab-btn bg-white text-[#0B4A2B] border border-gray-300 px-6 py-2.5 rounded-full font-bold shadow-sm transition-all" data-target="teachers-tab">
+                <i class="fa-solid fa-user-tie mr-2"></i> শিক্ষক ও স্টাফ
+            </button>
+            <button class="tab-btn bg-white text-[#0B4A2B] border border-gray-300 px-6 py-2.5 rounded-full font-bold shadow-sm transition-all" data-target="notices-tab">
+                <i class="fa-solid fa-bullhorn mr-2"></i> নোটিশ বোর্ড
+            </button>
+            <button class="tab-btn bg-white text-[#0B4A2B] border border-gray-300 px-6 py-2.5 rounded-full font-bold shadow-sm transition-all" data-target="results-tab">
+                <i class="fa-solid fa-square-poll-vertical mr-2"></i> রেজাল্ট সেকশন
+            </button>
+            <button class="tab-btn bg-white text-[#0B4A2B] border border-gray-300 px-6 py-2.5 rounded-full font-bold shadow-sm transition-all" data-target="links-tab">
+                <i class="fa-solid fa-link mr-2"></i> গুরুত্বপূর্ণ লিংক
+            </button>
+            <button class="tab-btn bg-white text-[#0B4A2B] border border-gray-300 px-6 py-2.5 rounded-full font-bold shadow-sm transition-all" data-target="prospectus-tab">
+                <i class="fa-solid fa-file-pdf mr-2"></i> প্রসপেক্টাস
+            </button>
+        </div>
 
-        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row gap-8 items-start">
-            
-            <!-- ================= LEFT COLUMN: FORMS ================= -->
-            <div class="w-full lg:w-1/3 xl:w-1/4 space-y-6">
-                
-                <!-- 1. Add Student Form -->
+        <div id="students-tab" class="tab-content flex flex-col lg:flex-row gap-8 items-start w-full">
+            <div class="w-full lg:w-1/3 xl:w-1/4">
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     <div class="bg-emerald-50 px-6 py-4 border-b border-emerald-100 flex items-center gap-2">
                         <i class="fa-solid fa-user-graduate text-[#0B4A2B]"></i>
@@ -156,70 +134,14 @@
                         </div>
                         <div class="pt-4 border-t border-gray-100 flex gap-2">
                             <button type="button" id="stu-clear-btn" class="px-4 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition"><i class="fa-solid fa-rotate-right"></i></button>
-                            <button type="submit" id="stu-submit-btn" class="flex-1 bg-[#0B4A2B] text-white py-3 rounded-lg font-bold hover:bg-[#07331D] transition shadow-md flex justify-center items-center gap-2">
+                            <button type="submit" id="stu-submit-btn" class="flex-1 bg-[#0B4A2B] text-white py-3 rounded-lg font-bold hover:bg-[#07331D] transition flex justify-center items-center gap-2">
                                 <i class="fa-solid fa-cloud-arrow-up"></i> সেভ করুন
                             </button>
                         </div>
                     </form>
                 </div>
-
-                <!-- 2. Add Teacher/Staff Form -->
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div class="bg-amber-50 px-6 py-4 border-b border-amber-100 flex items-center gap-2">
-                        <i class="fa-solid fa-user-tie text-[#0B4A2B]"></i>
-                        <h2 class="text-lg font-bold text-[#0B4A2B]">শিক্ষক ও স্টাফ যুক্ত করুন</h2>
-                    </div>
-                    <form id="add-teacher-form" class="p-6 space-y-4">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1">নাম *</label>
-                            <input type="text" id="tch-name" placeholder="যেমন: মো: শফিকুল ইসলাম" class="form-input text-sm" required>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">আইডি/ইনডেক্স *</label>
-                                <input type="text" id="tch-id" placeholder="যেমন: T-101" class="form-input text-sm" required>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">ধরন *</label>
-                                <select id="tch-type" class="form-input text-sm" required>
-                                    <option value="teacher">শিক্ষক</option>
-                                    <option value="staff">স্টাফ/কর্মচারী</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1">পদবি/বিষয় *</label>
-                            <input type="text" id="tch-designation" placeholder="যেমন: সহকারী শিক্ষক (আরবি)" class="form-input text-sm" required>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1">ছবির লিংক (URL) *</label>
-                            <input type="url" id="tch-photo" placeholder="https://..." class="form-input text-sm" required>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">মোবাইল *</label>
-                                <input type="tel" id="tch-phone" placeholder="017..." class="form-input text-sm" required>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">ইমেইল (ঐচ্ছিক)</label>
-                                <input type="email" id="tch-email" placeholder="email@" class="form-input text-sm">
-                            </div>
-                        </div>
-                        <div class="pt-4 border-t border-gray-100 flex gap-2">
-                            <button type="button" id="tch-clear-btn" class="px-4 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition"><i class="fa-solid fa-rotate-right"></i></button>
-                            <button type="submit" id="tch-submit-btn" class="flex-1 bg-[#D4AF37] text-[#0B4A2B] py-3 rounded-lg font-bold hover:bg-yellow-500 transition shadow-md flex justify-center items-center gap-2">
-                                <i class="fa-solid fa-cloud-arrow-up"></i> সেভ করুন
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
             </div>
-
-            <!-- ================= RIGHT COLUMN: TABLES ================= -->
-            <div class="w-full lg:w-2/3 xl:w-3/4 space-y-6">
-                
-                <!-- 1. Student Table -->
+            <div class="w-full lg:w-2/3 xl:w-3/4">
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <div class="flex items-center gap-2">
@@ -250,8 +172,62 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- 2. Teacher/Staff Table -->
+        <div id="teachers-tab" class="tab-content hidden flex flex-col lg:flex-row gap-8 items-start w-full">
+            <div class="w-full lg:w-1/3 xl:w-1/4">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-amber-50 px-6 py-4 border-b border-amber-100 flex items-center gap-2">
+                        <i class="fa-solid fa-user-tie text-[#0B4A2B]"></i>
+                        <h2 class="text-lg font-bold text-[#0B4A2B]">শিক্ষক ও স্টাফ যুক্ত করুন</h2>
+                    </div>
+                    <form id="add-teacher-form" class="p-6 space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">নাম *</label>
+                            <input type="text" id="tch-name" placeholder="যেমন: মো: শফিকুল ইসলাম" class="form-input text-sm" required>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">আইডি/ইনডেক্স *</label>
+                                <input type="text" id="tch-id" placeholder="যেমন: T-101" class="form-input text-sm" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">ধরন *</label>
+                                <select id="tch-type" class="form-input text-sm" required>
+                                    <option value="teacher">শিক্ষক</option>
+                                    <option value="staff">স্টাফ/কর্মচারী</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">পদবি/বিষয় *</label>
+                            <input type="text" id="tch-designation" placeholder="যেমন: সহকারী শিক্ষক (আরবি)" class="form-input text-sm" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">ছবির লিংক (URL) *</label>
+                            <input type="url" id="tch-photo" placeholder="https://..." class="form-input text-sm" required>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">মোবাইল *</label>
+                                <input type="tel" id="tch-phone" placeholder="017..." class="form-input text-sm" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">ইমেইল (ঐচ্ছিক)</label>
+                                <input type="email" id="tch-email" placeholder="email@" class="form-input text-sm">
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex gap-2">
+                            <button type="button" id="tch-clear-btn" class="px-4 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition"><i class="fa-solid fa-rotate-right"></i></button>
+                            <button type="submit" id="tch-submit-btn" class="flex-1 bg-[#D4AF37] text-[#0B4A2B] py-3 rounded-lg font-bold hover:bg-yellow-500 transition flex justify-center items-center gap-2">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> সেভ করুন
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="w-full lg:w-2/3 xl:w-3/4">
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <div class="flex items-center gap-2">
@@ -282,75 +258,468 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
 
+        <div id="notices-tab" class="tab-content hidden flex flex-col lg:flex-row gap-8 items-start w-full">
+            <div class="w-full lg:w-1/3 xl:w-1/4">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-blue-50 px-6 py-4 border-b border-blue-100 flex items-center gap-2">
+                        <i class="fa-solid fa-pen-to-square text-blue-600"></i>
+                        <h2 class="text-lg font-bold text-blue-800">নোটিশ যুক্ত করুন</h2>
+                    </div>
+                    <form id="add-notice-form" class="p-6 space-y-4">
+                        <input type="hidden" id="notice-id">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">নোটিশের শিরোনাম *</label>
+                            <textarea id="not-title" rows="2" placeholder="যেমন: হাফেজী ও কিতাব বিভাগের ক্লাস শুরুর নোটিশ..." class="form-input text-sm resize-none" required></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">নোটিশ বিস্তারিত *</label>
+                            <textarea id="not-desc" rows="4" placeholder="নোটিশের বিবরণ এখানে লিখুন..." class="form-input text-sm resize-y" required></textarea>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">তারিখ (দিন) *</label>
+                                <input type="text" id="not-day" placeholder="যেমন: ২৩" class="form-input text-sm" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">মাস ও বছর *</label>
+                                <input type="text" id="not-month" placeholder="যেমন: জুন, ২০২৬" class="form-input text-sm" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">প্রকাশের সময় *</label>
+                            <input type="text" id="not-time" placeholder="যেমন: দুপুর ২:৪৫ মিনিট" class="form-input text-sm" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">নতুন ব্যাজ দেখাবেন?</label>
+                            <select id="not-isnew" class="form-input text-sm">
+                                <option value="yes" selected>হ্যাঁ ("নতুন" ব্যাজ জ্বলবে)</option>
+                                <option value="no">না</option>
+                            </select>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex gap-2">
+                            <button type="button" id="not-clear-btn" class="px-4 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition"><i class="fa-solid fa-rotate-right"></i></button>
+                            <button type="submit" id="not-submit-btn" class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-800 transition flex justify-center items-center gap-2">
+                                <i class="fa-solid fa-bullhorn"></i> প্রকাশ করুন
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="w-full lg:w-2/3 xl:w-3/4">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-bullhorn text-blue-500 text-xl"></i>
+                            <h2 class="text-lg font-bold text-gray-800">নোটিশ পরিচালনা</h2>
+                            <span id="not-total-count" class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-bold">০ টি</span>
+                        </div>
+                        <div class="relative w-full sm:w-auto">
+                            <input type="text" id="not-search-input" placeholder="শিরোনাম দিয়ে খুঁজুন..." class="w-full sm:w-64 text-sm px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-blue-500">
+                            <i class="fa-solid fa-magnifying-glass absolute right-4 top-2.5 text-gray-400 text-sm"></i>
+                        </div>
+                    </div>
+                    <div id="not-empty-state" class="p-10 text-center text-gray-400">
+                        <i class="fa-solid fa-database text-4xl mb-3 text-gray-300"></i>
+                        <p class="text-base font-semibold">নোটিশ লোড হচ্ছে...</p>
+                    </div>
+                    <div id="not-table-container" class="overflow-x-auto p-0 hidden">
+                        <table class="w-full text-left border-collapse whitespace-nowrap">
+                            <thead>
+                                <tr class="bg-blue-50 text-blue-800 text-sm border-b border-blue-100">
+                                    <th class="py-3 px-6 font-bold">তারিখ</th>
+                                    <th class="py-3 px-6 font-bold">নোটিশের শিরোনাম</th>
+                                    <th class="py-3 px-6 font-bold text-center">অ্যাকশন</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-notices-list" class="text-sm divide-y divide-gray-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="results-tab" class="tab-content hidden flex flex-col lg:flex-row gap-8 items-start w-full">
+            <div class="w-full lg:w-1/3 xl:w-1/4">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-indigo-50 px-6 py-4 border-b border-indigo-100 flex items-center gap-2">
+                        <i class="fa-solid fa-file-lines text-indigo-700"></i>
+                        <h2 class="text-lg font-bold text-indigo-800">রেজাল্ট যুক্ত করুন</h2>
+                    </div>
+                    <form id="add-result-form" class="p-6 space-y-4">
+                        <input type="hidden" id="res-id">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">স্টুডেন্ট আইডি *</label>
+                                <input type="text" id="res-stu-id" class="form-input text-sm" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">মাস *</label>
+                                <select id="res-month" class="form-input text-sm" required>
+                                    <option value="june-2026">জুন ২০২৬</option>
+                                    <option value="may-2026">মে ২০২৬</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">শ্রেণি *</label>
+                                <select id="res-class" class="form-input text-sm" required>
+                                    <option value="one">প্রথম</option>
+                                    <option value="two">দ্বিতীয়</option>
+                                    <option value="three">তৃতীয়</option>
+                                    <option value="four">চতুর্থ</option>
+                                    <option value="five">পঞ্চম</option>
+                                    <option value="six">ষষ্ঠ</option>
+                                    <option value="seven">সপ্তম</option>
+                                    <option value="eight">অষ্টম</option>
+                                    <option value="nine">নবম</option>
+                                    <option value="ten">দশম</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">জিপিএ (GPA) *</label>
+                                <input type="text" id="res-gpa" placeholder="5.00" class="form-input text-sm" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">মোট নম্বর *</label>
+                            <input type="number" id="res-total" placeholder="৪৫০" class="form-input text-sm" required>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex gap-2">
+                            <button type="button" id="res-clear-btn" class="px-4 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition"><i class="fa-solid fa-rotate-right"></i></button>
+                            <button type="submit" id="res-submit-btn" class="flex-1 bg-indigo-600 text-white py-3 rounded-lg font-bold hover:bg-indigo-800 transition flex justify-center items-center gap-2">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> সেভ করুন
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="w-full lg:w-2/3 xl:w-3/4">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-square-poll-vertical text-indigo-500 text-xl"></i>
+                            <h2 class="text-lg font-bold text-gray-800">ফলাফল পরিচালনা</h2>
+                            <span id="res-total-count" class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs font-bold ml-2">০ টি</span>
+                        </div>
+                        <div class="relative w-full sm:w-auto">
+                            <input type="text" id="res-search-input" placeholder="আইডি বা নাম দিয়ে খুঁজুন..." class="w-full sm:w-64 text-sm px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-indigo-500">
+                            <i class="fa-solid fa-magnifying-glass absolute right-4 top-2.5 text-gray-400 text-sm"></i>
+                        </div>
+                    </div>
+                    <div id="res-empty-state" class="p-10 text-center text-gray-400">
+                        <i class="fa-solid fa-database text-4xl mb-3 text-gray-300"></i>
+                        <p class="text-base font-semibold">ফলাফল লোড হচ্ছে...</p>
+                    </div>
+                    <div id="res-table-container" class="overflow-x-auto p-0 hidden">
+                        <table class="w-full text-left border-collapse whitespace-nowrap">
+                            <thead>
+                                <tr class="bg-indigo-50 text-indigo-800 text-sm border-b border-indigo-100">
+                                    <th class="py-3 px-6 font-bold">শিক্ষার্থী</th>
+                                    <th class="py-3 px-6 font-bold">আইডি</th>
+                                    <th class="py-3 px-6 font-bold">ফলাফল (GPA)</th>
+                                    <th class="py-3 px-6 font-bold text-center">অ্যাকশন</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-results-list" class="text-sm divide-y divide-gray-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="links-tab" class="tab-content hidden flex flex-col lg:flex-row gap-8 items-start w-full">
+            <div class="w-full lg:w-1/3 xl:w-1/4">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-teal-50 px-6 py-4 border-b border-teal-100 flex items-center gap-2">
+                        <i class="fa-solid fa-link text-teal-700"></i>
+                        <h2 class="text-lg font-bold text-teal-800">লিংক যুক্ত করুন</h2>
+                    </div>
+                    <form id="add-link-form" class="p-6 space-y-4">
+                        <input type="hidden" id="link-id">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">লিংকের নাম (Title) *</label>
+                            <input type="text" id="link-title" placeholder="যেমন: একাডেমিক ক্যালেন্ডার..." class="form-input text-sm" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">লিংক (URL) *</label>
+                            <input type="url" id="link-url" placeholder="https://..." class="form-input text-sm" required>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex gap-2">
+                            <button type="button" id="link-clear-btn" class="px-4 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition"><i class="fa-solid fa-rotate-right"></i></button>
+                            <button type="submit" id="link-submit-btn" class="flex-1 bg-teal-600 text-white py-3 rounded-lg font-bold hover:bg-teal-800 transition flex justify-center items-center gap-2">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> সেভ করুন
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="w-full lg:w-2/3 xl:w-3/4">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-list text-teal-500 text-xl"></i>
+                            <h2 class="text-lg font-bold text-gray-800">লিংক পরিচালনা</h2>
+                            <span id="link-total-count" class="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-xs font-bold ml-2">০ টি</span>
+                        </div>
+                    </div>
+                    <div id="link-empty-state" class="p-10 text-center text-gray-400">
+                        <i class="fa-solid fa-database text-4xl mb-3 text-gray-300"></i>
+                        <p class="text-base font-semibold">লিংক লোড হচ্ছে...</p>
+                    </div>
+                    <div id="link-table-container" class="overflow-x-auto p-0 hidden">
+                        <table class="w-full text-left border-collapse whitespace-nowrap">
+                            <thead>
+                                <tr class="bg-teal-50 text-teal-800 text-sm border-b border-teal-100">
+                                    <th class="py-3 px-6 font-bold">লিংকের নাম</th>
+                                    <th class="py-3 px-6 font-bold">URL</th>
+                                    <th class="py-3 px-6 font-bold text-center">অ্যাকশন</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-links-list" class="text-sm divide-y divide-gray-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="prospectus-tab" class="tab-content hidden flex flex-col gap-8 items-start w-full max-w-2xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden w-full">
+                <div class="bg-rose-50 px-6 py-4 border-b border-rose-100 flex items-center gap-2">
+                    <i class="fa-solid fa-file-pdf text-rose-700"></i>
+                    <h2 class="text-lg font-bold text-rose-800">প্রসপেক্টাস লিংক আপডেট করুন</h2>
+                </div>
+                <form id="update-prospectus-form" class="p-6 space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">পিডিএফ (PDF) লিংক *</label>
+                        <input type="url" id="prospectus-url" placeholder="Google Drive বা অন্য কোনো PDF লিংক..." class="form-input text-sm" required>
+                    </div>
+                    <div class="pt-4 border-t border-gray-100">
+                        <button type="submit" id="prospectus-submit-btn" class="w-full bg-rose-600 text-white py-3 rounded-lg font-bold hover:bg-rose-800 transition flex justify-center items-center gap-2">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> লিংক আপডেট করুন
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="success-popup" class="hidden fixed inset-0 z-[150] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 transition-opacity">
+        <div class="bg-white rounded-2xl w-full max-w-sm shadow-2xl transform scale-95 transition-transform border-b-8 border-[#0B4A2B] overflow-hidden text-center p-6 relative">
+            <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-emerald-50 border-4 border-emerald-500/30 mb-4 animate-bounce">
+                <i class="fa-solid fa-circle-check text-4xl text-emerald-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-[#0B4A2B] mb-2">আলহামদুলিল্লাহ!</h3>
+            <p id="success-popup-message" class="text-gray-600 text-sm font-medium mb-6">সফলভাবে লাইভ ওয়েবসাইটে প্রকাশিত হয়েছে।</p>
+            <button id="close-success-btn" class="w-full bg-[#0B4A2B] text-white py-2.5 rounded-xl font-bold hover:bg-[#07331D] active:scale-[0.98] transition shadow-md tracking-wide">ঠিক আছে</button>
+        </div>
+    </div>
+
+    <div id="delete-confirm-popup" class="hidden fixed inset-0 z-[150] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 transition-opacity">
+        <div class="bg-white rounded-2xl w-full max-w-sm shadow-2xl border-b-8 border-red-600 text-center p-6 relative">
+            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-50 border-4 border-red-500/30 mb-4 text-red-600 text-3xl">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3 class="text-xl font-bold text-red-700 mb-2">আপনি কি নিশ্চিত?</h3>
+            <p class="text-gray-600 text-sm font-medium mb-6">এই তথ্যটি ডিলিট করলে তা লাইভ ওয়েবসাইট থেকে চিরতরে মুছে যাবে!</p>
+            <div class="flex gap-3">
+                <button id="confirm-delete-cancel" class="flex-1 bg-gray-100 text-gray-600 py-2.5 rounded-xl font-bold hover:bg-gray-200 transition">বাতিল</button>
+                <button id="confirm-delete-ok" class="flex-1 bg-red-600 text-white py-2.5 rounded-xl font-bold hover:bg-red-700 transition shadow-md shadow-red-900/10">হ্যাঁ, ডিলিট করুন</button>
             </div>
         </div>
     </div>
 
-    <!-- FIREBASE & LOGIC SCRIPTS -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
-        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-        // TODO: আপনার ফায়ারবেস কনফিগারেশন এখানে বসান
+        // ফায়ারবেস কনফিগারেশন
         const firebaseConfig = {
             apiKey: "AIzaSyA5rw6zSgRauNURUOmiXiVs-foRYjRTBOo",
-  authDomain: "rajarhat-islamia-model-mad.firebaseapp.com",
-  projectId: "rajarhat-islamia-model-mad",
-  storageBucket: "rajarhat-islamia-model-mad.firebasestorage.app",
-  messagingSenderId: "563719183379",
-  appId: "1:563719183379:web:bb5d0f05eec1263b62b3e6",
-  measurementId: "G-1TSLJR0C4Q"
+            authDomain: "rajarhat-islamia-model-mad.firebaseapp.com",
+            projectId: "rajarhat-islamia-model-mad",
+            storageBucket: "rajarhat-islamia-model-mad.firebasestorage.app",
+            messagingSenderId: "563719183379",
+            appId: "1:563719183379:web:bb5d0f05eec1263b62b3e6",
+            measurementId: "G-1TSLJR0C4Q"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
-        const auth = getAuth(app);
 
-        // Translations for UI
+        // Translations
         const classNamesBn = { 'one': 'প্রথম', 'two': 'দ্বিতীয়', 'three': 'তৃতীয়', 'four': 'চতুর্থ', 'five': 'পঞ্চম', 'six': 'ষষ্ঠ', 'seven': 'সপ্তম', 'eight': 'অষ্টম', 'nine': 'নবম', 'ten': 'দশম' };
         const sectionNamesBn = { 'padma': 'পদ্মা', 'meghna': 'মেঘনা', 'jamuna': 'যমুনা', 'none': '' };
         const typeNamesBn = { 'teacher': 'শিক্ষক', 'staff': 'স্টাফ' };
 
         let currentStudentsData = {};
         let currentTeachersData = {};
+        let currentNoticesData = {};
+        let currentResultsData = {};
 
-        // --- AUTH LOGIC ---
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                document.getElementById('login-section').classList.add('hidden');
-                document.getElementById('dashboard-section').classList.remove('hidden');
-                fetchStudents();
-                fetchTeachers();
-            } else {
-                document.getElementById('login-section').classList.remove('hidden');
-                document.getElementById('dashboard-section').classList.add('hidden');
-            }
+        // গ্লোবাল ডিলিট ট্র্যাকার ভেরিয়েবলস
+        let deleteTargetRef = null;
+
+        // INITIAL LOADING CALLS
+        fetchStudents();
+        fetchTeachers();
+        fetchNotices();
+        fetchResults();
+
+        // ================= 5. LINKS BACKEND LOGIC (NEW) =================
+        let currentLinksData = {};
+
+        document.getElementById('link-clear-btn').addEventListener('click', () => {
+            document.getElementById('add-link-form').reset();
+            document.getElementById('link-id').value = '';
+            document.getElementById('link-submit-btn').innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> সেভ করুন';
         });
 
-        document.getElementById('login-form').addEventListener('submit', (e) => {
+        document.getElementById('add-link-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const pass = document.getElementById('login-password').value;
-            const loginBtn = document.getElementById('login-btn');
-            
-            loginBtn.innerHTML = '<div class="loader"></div>';
-            loginBtn.disabled = true;
-            document.getElementById('login-error').classList.add('hidden');
+            const submitBtn = document.getElementById('link-submit-btn');
+            const isUpdating = document.getElementById('link-id').value ? true : false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...';
+            submitBtn.disabled = true;
 
-            signInWithEmailAndPassword(auth, email, pass).catch(() => {
-                document.getElementById('login-error').classList.remove('hidden');
-                loginBtn.innerHTML = '<span>লগইন করুন</span> <i class="fa-solid fa-arrow-right-to-bracket"></i>';
-                loginBtn.disabled = false;
+            let lId = document.getElementById('link-id').value;
+            if (!lId) lId = 'LINK-' + Date.now(); 
+
+            const data = {
+                title: document.getElementById('link-title').value.trim(),
+                url: document.getElementById('link-url').value.trim(),
+                timestamp: Date.now()
+            };
+
+            set(ref(db, 'links/' + lId), data).then(() => {
+                document.getElementById('link-clear-btn').click();
+                submitBtn.disabled = false;
+                if(isUpdating) showSuccessPopup("লিংকটি সফলভাবে আপডেট করা হয়েছে!");
+                else showSuccessPopup("নতুন লিংক সফলভাবে যুক্ত করা হয়েছে!");
             });
         });
 
-        document.getElementById('logout-btn').addEventListener('click', () => {
-            if(confirm("লগআউট করতে চান?")) signOut(auth);
+        function fetchLinks() {
+            onValue(ref(db, 'links'), (snapshot) => {
+                const emptyState = document.getElementById('link-empty-state');
+                const tableContainer = document.getElementById('link-table-container');
+                const list = document.getElementById('admin-links-list');
+                const totalCount = document.getElementById('link-total-count');
+
+                if (snapshot.exists()) {
+                    emptyState.classList.add('hidden');
+                    tableContainer.classList.remove('hidden');
+                    list.innerHTML = '';
+                    currentLinksData = snapshot.val();
+                    let count = 0;
+
+                    const sortedIds = Object.keys(currentLinksData).sort((a, b) => currentLinksData[a].timestamp - currentLinksData[b].timestamp);
+
+                    sortedIds.forEach(lId => {
+                        const link = currentLinksData[lId];
+                        count++;
+                        list.innerHTML += `
+                            <tr class="hover:bg-teal-50/30 transition">
+                                <td class="py-3 px-6 font-bold text-gray-800">${link.title}</td>
+                                <td class="py-3 px-6 text-teal-600"><a href="${link.url}" target="_blank" class="hover:underline"><i class="fa-solid fa-external-link-alt mr-1"></i>লিংক চেক করুন</a></td>
+                                <td class="py-3 px-6 text-center whitespace-nowrap">
+                                    <button class="link-edit text-blue-500 bg-blue-50 p-1.5 rounded hover:bg-blue-600 hover:text-white mr-1" data-id="${lId}"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="link-del text-red-500 bg-red-50 p-1.5 rounded hover:bg-red-600 hover:text-white" data-id="${lId}"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>`;
+                    });
+                    totalCount.innerText = count + ' টি';
+                    
+                    document.querySelectorAll('.link-del').forEach(btn => btn.addEventListener('click', (e) => {
+                        askDeleteConfirmation(ref(db, 'links/' + e.currentTarget.getAttribute('data-id')), "আপনি কি নিশ্চিত যে এই লিংকটি ডিলিট করতে চান?");
+                    }));
+                    document.querySelectorAll('.link-edit').forEach(btn => btn.addEventListener('click', (e) => {
+                        const id = e.currentTarget.getAttribute('data-id');
+                        const data = currentLinksData[id];
+                        document.getElementById('link-id').value = id;
+                        document.getElementById('link-title').value = data.title;
+                        document.getElementById('link-url').value = data.url;
+                        document.getElementById('link-submit-btn').innerHTML = '<i class="fa-solid fa-pen-to-square"></i> আপডেট করুন';
+                    }));
+                } else {
+                    emptyState.classList.remove('hidden');
+                    tableContainer.classList.add('hidden');
+                    totalCount.innerText = '০ টি';
+                }
+            });
+        }
+        
+        // পেজ লোড হওয়ার সাথে সাথে লিংক ফেচ করা শুরু করবে
+        fetchLinks();
+        // ================= 6. PROSPECTUS BACKEND LOGIC =================
+        const prospectusForm = document.getElementById('update-prospectus-form');
+        const prospectusUrlInput = document.getElementById('prospectus-url');
+        const prospectusSubmitBtn = document.getElementById('prospectus-submit-btn');
+
+        // ডাটাবেস থেকে বর্তমান লিংকটি ফেচ করে ইনপুট বক্সে দেখানো
+        onValue(ref(db, 'settings/prospectus'), (snapshot) => {
+            if (snapshot.exists()) {
+                prospectusUrlInput.value = snapshot.val().url;
+            }
         });
 
-        // ================= STUDENT LOGIC =================
+        // নতুন লিংক আপডেট করা
+        prospectusForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            prospectusSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> হচ্ছে...';
+            prospectusSubmitBtn.disabled = true;
+
+            set(ref(db, 'settings/prospectus'), {
+                url: prospectusUrlInput.value.trim(),
+                updatedAt: Date.now()
+            }).then(() => {
+                prospectusSubmitBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> লিংক আপডেট করুন';
+                prospectusSubmitBtn.disabled = false;
+                showSuccessPopup("প্রসপেক্টাস লিংকটি সফলভাবে আপডেট হয়েছে!");
+            });
+        });
+
+        // --- AUTOMATED TAB CONTROL SYSTEM ---
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active', 'bg-[#D4AF37]', 'text-[#0B4A2B]'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+                btn.classList.add('active');
+                document.getElementById(btn.getAttribute('data-target')).classList.remove('hidden');
+            });
+        });
+
+        // --- POPUP UTILITIES ---
+        function showSuccessPopup(message) {
+            document.getElementById('success-popup-message').innerText = message;
+            document.getElementById('success-popup').classList.remove('hidden');
+        }
+        document.getElementById('close-success-btn').addEventListener('click', () => {
+            document.getElementById('success-popup').classList.add('hidden');
+        });
+
+        function askDeleteConfirmation(dbRef, callback) {
+            deleteTargetRef = dbRef;
+            document.getElementById('delete-confirm-popup').classList.remove('hidden');
+        }
+        document.getElementById('confirm-delete-cancel').addEventListener('click', () => {
+            document.getElementById('delete-confirm-popup').classList.add('hidden');
+            deleteTargetRef = null;
+        });
+        document.getElementById('confirm-delete-ok').addEventListener('click', () => {
+            if (deleteTargetRef) {
+                remove(deleteTargetRef).then(() => {
+                    document.getElementById('delete-confirm-popup').classList.add('hidden');
+                    deleteTargetRef = null;
+                    showSuccessPopup("তথ্যটি সফলভাবে মুছে ফেলা হয়েছে!");
+                });
+            }
+        });
+
+        // ================= 1. STUDENT BACKEND LOGIC =================
         document.getElementById('stu-clear-btn').addEventListener('click', () => {
             document.getElementById('add-student-form').reset();
             document.getElementById('stu-id').readOnly = false;
@@ -360,6 +729,7 @@
         document.getElementById('add-student-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('stu-submit-btn');
+            const isUpdating = document.getElementById('stu-id').readOnly;
             submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...';
             submitBtn.disabled = true;
 
@@ -380,7 +750,8 @@
             set(ref(db, 'students/' + sId), data).then(() => {
                 document.getElementById('stu-clear-btn').click();
                 submitBtn.disabled = false;
-                alert("শিক্ষার্থীর তথ্য সফলভাবে সেভ হয়েছে!");
+                if(isUpdating) showSuccessPopup("শিক্ষার্থীর প্রোফাইল সফলভাবে আপডেট হয়েছে!");
+                else showSuccessPopup("নতুন শিক্ষার্থীর তথ্য সফলভাবে সেভ হয়েছে!");
             });
         });
 
@@ -401,7 +772,6 @@
                     Object.keys(currentStudentsData).reverse().forEach(sId => {
                         const stu = currentStudentsData[sId];
                         count++;
-                        
                         const vBadge = stu.verified === 'yes' ? `<i class="fa-solid fa-circle-check text-[#1877F2]"></i>` : '';
                         const secBadge = stu.section !== 'none' ? `<span class="bg-amber-50 text-[#D4AF37] px-2 py-0.5 rounded text-xs font-bold ml-1">${sectionNamesBn[stu.section]}</span>` : '';
 
@@ -409,12 +779,9 @@
                             <tr class="hover:bg-gray-50 transition stu-row">
                                 <td class="py-3 px-6 flex items-center gap-3">
                                     <img src="${stu.photoUrl}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/149/149071.png'" class="w-10 h-10 rounded-full object-cover border border-gray-200">
-                                    <div>
-                                        <p class="font-bold text-gray-800 stu-name-col">${stu.name} ${vBadge}</p>
-                                        <p class="text-[11px] text-gray-500">${stu.phone}</p>
-                                    </div>
+                                    <div><p class="font-bold text-gray-800">${stu.name} ${vBadge}</p><p class="text-[11px] text-gray-500">${stu.phone}</p></div>
                                 </td>
-                                <td class="py-3 px-6 font-semibold text-[#0B4A2B] stu-id-col">${sId}</td>
+                                <td class="py-3 px-6 font-semibold text-[#0B4A2B]">${sId}</td>
                                 <td class="py-3 px-6"><span class="bg-emerald-50 text-[#0B4A2B] px-2 py-0.5 rounded text-xs font-bold">${classNamesBn[stu.class]}</span>${secBadge}</td>
                                 <td class="py-3 px-6 text-center">
                                     <button class="stu-edit text-blue-500 bg-blue-50 p-1.5 rounded hover:bg-blue-500 hover:text-white mr-1" data-id="${sId}"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -427,7 +794,6 @@
                     attachStudentListeners();
                 } else {
                     emptyState.classList.remove('hidden');
-                    emptyState.innerHTML = `<i class="fa-solid fa-users-slash text-4xl mb-3 text-gray-300"></i><p>কোনো শিক্ষার্থী নেই</p>`;
                     tableContainer.classList.add('hidden');
                     totalCount.innerText = '০ জন';
                 }
@@ -437,51 +803,53 @@
         function attachStudentListeners() {
             document.querySelectorAll('.stu-del').forEach(btn => btn.addEventListener('click', (e) => {
                 const id = e.currentTarget.getAttribute('data-id');
-                if(confirm(`স্টুডেন্ট আইডি: ${id} ডিলিট করবেন?`)) remove(ref(db, 'students/' + id));
+                askDeleteConfirmation(ref(db, 'students/' + id), `আপনি কি নিশ্চিত যে শিক্ষার্থী আইডি: ${id}-এর সমস্ত তথ্য ডিলিট করতে চান?`);
             }));
             document.querySelectorAll('.stu-edit').forEach(btn => btn.addEventListener('click', (e) => {
                 const id = e.currentTarget.getAttribute('data-id');
-                populateStudentForm(id, currentStudentsData[id], false);
+                const data = currentStudentsData[id];
+                document.getElementById('stu-name').value = data.name;
+                document.getElementById('stu-verified').value = data.verified || 'no';
+                document.getElementById('stu-class').value = data.class;
+                document.getElementById('stu-section').value = data.section || 'none';
+                document.getElementById('stu-photo').value = data.photoUrl;
+                document.getElementById('stu-father').value = data.fatherName;
+                document.getElementById('stu-mother').value = data.motherName;
+                document.getElementById('stu-address').value = data.address;
+                document.getElementById('stu-phone').value = data.phone;
+                document.getElementById('stu-id').value = id;
+                document.getElementById('stu-id').readOnly = true;
+                document.getElementById('stu-submit-btn').innerHTML = '<i class="fa-solid fa-pen-to-square"></i> আপডেট করুন';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }));
             document.querySelectorAll('.stu-copy').forEach(btn => btn.addEventListener('click', (e) => {
                 const id = e.currentTarget.getAttribute('data-id');
-                populateStudentForm(id, currentStudentsData[id], true);
+                const data = currentStudentsData[id];
+                document.getElementById('stu-name').value = data.name;
+                document.getElementById('stu-verified').value = data.verified || 'no';
+                document.getElementById('stu-class').value = data.class;
+                document.getElementById('stu-section').value = data.section || 'none';
+                document.getElementById('stu-photo').value = data.photoUrl;
+                document.getElementById('stu-father').value = data.fatherName;
+                document.getElementById('stu-mother').value = data.motherName;
+                document.getElementById('stu-address').value = data.address;
+                document.getElementById('stu-phone').value = data.phone;
+                document.getElementById('stu-id').value = '';
+                document.getElementById('stu-id').readOnly = false;
+                document.getElementById('stu-id').focus();
+                document.getElementById('stu-submit-btn').innerHTML = '<i class="fa-solid fa-copy"></i> কপি সেভ করুন';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }));
-        }
-
-        function populateStudentForm(id, data, isCopy) {
-            document.getElementById('stu-name').value = data.name;
-            document.getElementById('stu-verified').value = data.verified || 'no';
-            document.getElementById('stu-class').value = data.class;
-            document.getElementById('stu-section').value = data.section || 'none';
-            document.getElementById('stu-photo').value = data.photoUrl;
-            document.getElementById('stu-father').value = data.fatherName;
-            document.getElementById('stu-mother').value = data.motherName;
-            document.getElementById('stu-address').value = data.address;
-            document.getElementById('stu-phone').value = data.phone;
-
-            const idField = document.getElementById('stu-id');
-            const submitBtn = document.getElementById('stu-submit-btn');
-
-            if (isCopy) {
-                idField.value = ''; idField.readOnly = false; idField.focus();
-                submitBtn.innerHTML = '<i class="fa-solid fa-copy"></i> কপি সেভ করুন';
-            } else {
-                idField.value = id; idField.readOnly = true;
-                submitBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i> আপডেট করুন';
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         document.getElementById('stu-search-input').addEventListener('keyup', (e) => {
             const term = e.target.value.toLowerCase();
             document.querySelectorAll('.stu-row').forEach(row => {
-                const text = row.innerText.toLowerCase();
-                row.style.display = text.includes(term) ? '' : 'none';
+                row.style.display = row.innerText.toLowerCase().includes(term) ? '' : 'none';
             });
         });
 
-        // ================= TEACHER LOGIC =================
+        // ================= 2. TEACHER BACKEND LOGIC =================
         document.getElementById('tch-clear-btn').addEventListener('click', () => {
             document.getElementById('add-teacher-form').reset();
             document.getElementById('tch-id').readOnly = false;
@@ -491,6 +859,7 @@
         document.getElementById('add-teacher-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('tch-submit-btn');
+            const isUpdating = document.getElementById('tch-id').readOnly;
             submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...';
             submitBtn.disabled = true;
 
@@ -508,7 +877,8 @@
             set(ref(db, 'teachers/' + tId), data).then(() => {
                 document.getElementById('tch-clear-btn').click();
                 submitBtn.disabled = false;
-                alert("শিক্ষক/স্টাফের তথ্য সফলভাবে সেভ হয়েছে!");
+                if(isUpdating) showSuccessPopup("শিক্ষক/স্টাফের প্রোফাইল সফলভাবে আপডেট হয়েছে!");
+                else showSuccessPopup("শিক্ষক/স্টাফের তথ্য সফলভাবে সেভ হয়েছে!");
             });
         });
 
@@ -529,23 +899,16 @@
                     Object.keys(currentTeachersData).reverse().forEach(tId => {
                         const tch = currentTeachersData[tId];
                         count++;
-                        
                         const typeBadgeClass = tch.type === 'teacher' ? 'bg-[#0B4A2B] text-white' : 'bg-gray-500 text-white';
 
                         list.innerHTML += `
                             <tr class="hover:bg-amber-50/50 transition tch-row">
                                 <td class="py-3 px-6 flex items-center gap-3">
                                     <img src="${tch.photoUrl}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/149/149071.png'" class="w-10 h-10 rounded-full object-cover border border-gray-200">
-                                    <div>
-                                        <p class="font-bold text-gray-800 tch-name-col">${tch.name}</p>
-                                        <p class="text-[11px] text-gray-500">${tch.phone}</p>
-                                    </div>
+                                    <div><p class="font-bold text-gray-800">${tch.name}</p><p class="text-[11px] text-gray-500">${tch.phone}</p></div>
                                 </td>
-                                <td class="py-3 px-6 font-semibold text-[#D4AF37] tch-id-col">${tId}</td>
-                                <td class="py-3 px-6">
-                                    <p class="text-xs font-bold text-gray-700">${tch.designation}</p>
-                                    <span class="${typeBadgeClass} px-2 py-0.5 rounded text-[10px] font-bold">${typeNamesBn[tch.type]}</span>
-                                </td>
+                                <td class="py-3 px-6 font-semibold text-[#D4AF37]">${tId}</td>
+                                <td class="py-3 px-6"><p class="text-xs font-bold text-gray-700">${tch.designation}</p><span class="${typeBadgeClass} px-2 py-0.5 rounded text-[10px] font-bold">${typeNamesBn[tch.type]}</span></td>
                                 <td class="py-3 px-6 text-center">
                                     <button class="tch-edit text-blue-500 bg-blue-50 p-1.5 rounded hover:bg-blue-500 hover:text-white mr-1" data-id="${tId}"><i class="fa-solid fa-pen-to-square"></i></button>
                                     <button class="tch-copy text-amber-600 bg-amber-50 p-1.5 rounded hover:bg-amber-600 hover:text-white mr-1" data-id="${tId}"><i class="fa-solid fa-copy"></i></button>
@@ -557,7 +920,6 @@
                     attachTeacherListeners();
                 } else {
                     emptyState.classList.remove('hidden');
-                    emptyState.innerHTML = `<i class="fa-solid fa-users-slash text-4xl mb-3 text-gray-300"></i><p>কোনো শিক্ষক/স্টাফ নেই</p>`;
                     tableContainer.classList.add('hidden');
                     totalCount.innerText = '০ জন';
                 }
@@ -567,44 +929,291 @@
         function attachTeacherListeners() {
             document.querySelectorAll('.tch-del').forEach(btn => btn.addEventListener('click', (e) => {
                 const id = e.currentTarget.getAttribute('data-id');
-                if(confirm(`আইডি: ${id} ডিলিট করবেন?`)) remove(ref(db, 'teachers/' + id));
+                askDeleteConfirmation(ref(db, 'teachers/' + id), `আপনি কি নিশ্চিত যে শিক্ষক আইডি: ${id}-এর সমস্ত তথ্য ডিলিট করতে চান?`);
             }));
             document.querySelectorAll('.tch-edit').forEach(btn => btn.addEventListener('click', (e) => {
                 const id = e.currentTarget.getAttribute('data-id');
-                populateTeacherForm(id, currentTeachersData[id], false);
+                const data = currentTeachersData[id];
+                document.getElementById('tch-name').value = data.name;
+                document.getElementById('tch-type').value = data.type;
+                document.getElementById('tch-designation').value = data.designation;
+                document.getElementById('tch-photo').value = data.photoUrl;
+                document.getElementById('tch-phone').value = data.phone;
+                document.getElementById('tch-email').value = data.email || '';
+                document.getElementById('tch-id').value = id;
+                document.getElementById('tch-id').readOnly = true;
+                document.getElementById('tch-submit-btn').innerHTML = '<i class="fa-solid fa-pen-to-square"></i> আপডেট করুন';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }));
             document.querySelectorAll('.tch-copy').forEach(btn => btn.addEventListener('click', (e) => {
                 const id = e.currentTarget.getAttribute('data-id');
-                populateTeacherForm(id, currentTeachersData[id], true);
+                const data = currentTeachersData[id];
+                document.getElementById('tch-name').value = data.name;
+                document.getElementById('tch-type').value = data.type;
+                document.getElementById('tch-designation').value = data.designation;
+                document.getElementById('tch-photo').value = data.photoUrl;
+                document.getElementById('tch-phone').value = data.phone;
+                document.getElementById('tch-email').value = data.email || '';
+                document.getElementById('tch-id').value = '';
+                document.getElementById('tch-id').readOnly = false;
+                document.getElementById('tch-id').focus();
+                document.getElementById('tch-submit-btn').innerHTML = '<i class="fa-solid fa-copy"></i> কপি সেভ করুন';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }));
-        }
-
-        function populateTeacherForm(id, data, isCopy) {
-            document.getElementById('tch-name').value = data.name;
-            document.getElementById('tch-type').value = data.type;
-            document.getElementById('tch-designation').value = data.designation;
-            document.getElementById('tch-photo').value = data.photoUrl;
-            document.getElementById('tch-phone').value = data.phone;
-            document.getElementById('tch-email').value = data.email || '';
-
-            const idField = document.getElementById('tch-id');
-            const submitBtn = document.getElementById('tch-submit-btn');
-
-            if (isCopy) {
-                idField.value = ''; idField.readOnly = false; idField.focus();
-                submitBtn.innerHTML = '<i class="fa-solid fa-copy"></i> কপি সেভ করুন';
-            } else {
-                idField.value = id; idField.readOnly = true;
-                submitBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i> আপডেট করুন';
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         document.getElementById('tch-search-input').addEventListener('keyup', (e) => {
             const term = e.target.value.toLowerCase();
             document.querySelectorAll('.tch-row').forEach(row => {
-                const text = row.innerText.toLowerCase();
-                row.style.display = text.includes(term) ? '' : 'none';
+                row.style.display = row.innerText.toLowerCase().includes(term) ? '' : 'none';
+            });
+        });
+
+        // ================= 3. NOTICE BACKEND LOGIC =================
+        document.getElementById('not-clear-btn').addEventListener('click', () => {
+            document.getElementById('add-notice-form').reset();
+            document.getElementById('notice-id').value = '';
+            document.getElementById('not-submit-btn').innerHTML = '<i class="fa-solid fa-bullhorn"></i> প্রকাশ করুন';
+        });
+
+        document.getElementById('add-notice-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('not-submit-btn');
+            const isUpdating = document.getElementById('notice-id').value ? true : false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> হচ্ছে...';
+            submitBtn.disabled = true;
+
+            let nId = document.getElementById('notice-id').value;
+            if (!nId) nId = 'NOT-' + Date.now(); 
+
+            const data = {
+                title: document.getElementById('not-title').value.trim(),
+                desc: document.getElementById('not-desc').value.trim(),
+                day: document.getElementById('not-day').value.trim(),
+                month: document.getElementById('not-month').value.trim(),
+                time: document.getElementById('not-time').value.trim(),
+                isNew: document.getElementById('not-isnew').value,
+                timestamp: Date.now()
+            };
+
+            set(ref(db, 'notices/' + nId), data).then(() => {
+                document.getElementById('not-clear-btn').click();
+                submitBtn.disabled = false;
+                if(isUpdating) showSuccessPopup("নোটিশটি সফলভাবে আপডেট করা হয়েছে!");
+                else showSuccessPopup("নোটিশটি সফলভাবে লাইভ ওয়েবসাইটে প্রকাশিত হয়েছে!");
+            });
+        });
+
+        function fetchNotices() {
+            onValue(ref(db, 'notices'), (snapshot) => {
+                const emptyState = document.getElementById('not-empty-state');
+                const tableContainer = document.getElementById('not-table-container');
+                const list = document.getElementById('admin-notices-list');
+                const totalCount = document.getElementById('not-total-count');
+
+                if (snapshot.exists()) {
+                    emptyState.classList.add('hidden');
+                    tableContainer.classList.remove('hidden');
+                    list.innerHTML = '';
+                    currentNoticesData = snapshot.val();
+                    let count = 0;
+
+                    const sortedIds = Object.keys(currentNoticesData).sort((a, b) => currentNoticesData[b].timestamp - currentNoticesData[a].timestamp);
+
+                    sortedIds.forEach(nId => {
+                        const not = currentNoticesData[nId];
+                        count++;
+                        const newBadge = not.isNew === 'yes' ? `<span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded ml-2">নতুন</span>` : '';
+
+                        list.innerHTML += `
+                            <tr class="hover:bg-blue-50/50 transition border-b border-gray-50 not-row">
+                                <td class="py-3 px-6">
+                                    <div class="bg-[#0B4A2B] text-white text-center rounded p-1 w-14">
+                                        <span class="block text-lg font-bold leading-tight">${not.day}</span>
+                                        <span class="block text-[9px] truncate px-1">${not.month}</span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-6 whitespace-normal">
+                                    <p class="font-bold text-gray-800 text-base">${not.title} ${newBadge}</p>
+                                    <p class="text-[11px] text-gray-500 mt-0.5"><i class="fa-regular fa-clock"></i> প্রকাশিত: ${not.time}</p>
+                                </td>
+                                <td class="py-3 px-6 text-center whitespace-nowrap">
+                                    <button class="not-edit text-blue-500 bg-blue-50 p-1.5 rounded hover:bg-blue-600 hover:text-white mr-1" data-id="${nId}"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="not-del text-red-500 bg-red-50 p-1.5 rounded hover:bg-red-600 hover:text-white" data-id="${nId}"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>`;
+                    });
+                    totalCount.innerText = count + ' টি';
+                    
+                    document.querySelectorAll('.not-del').forEach(btn => btn.addEventListener('click', (e) => {
+                        const id = e.currentTarget.getAttribute('data-id');
+                        askDeleteConfirmation(ref(db, 'notices/' + id), `আপনি কি নিশ্চিত যে এই নোটিশটি লাইভ ওয়েবসাইট থেকে ডিলিট করতে চান?`);
+                    }));
+                    document.querySelectorAll('.not-edit').forEach(btn => btn.addEventListener('click', (e) => {
+                        const id = e.currentTarget.getAttribute('data-id');
+                        const data = currentNoticesData[id];
+                        document.getElementById('notice-id').value = id;
+                        document.getElementById('not-title').value = data.title;
+                        document.getElementById('not-desc').value = data.desc || '';
+                        document.getElementById('not-day').value = data.day;
+                        document.getElementById('not-month').value = data.month;
+                        document.getElementById('not-time').value = data.time;
+                        document.getElementById('not-isnew').value = data.isNew;
+                        document.getElementById('not-submit-btn').innerHTML = '<i class="fa-solid fa-pen-to-square"></i> নোটিশ আপডেট করুন';
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }));
+                } else {
+                    emptyState.classList.remove('hidden');
+                    tableContainer.classList.add('hidden');
+                    totalCount.innerText = '০ টি';
+                }
+            });
+        }
+
+        document.getElementById('not-search-input').addEventListener('keyup', (e) => {
+            const term = e.target.value.toLowerCase();
+            document.querySelectorAll('.not-row').forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(term) ? '' : 'none';
+            });
+        });
+
+        // ================= 4. RESULT BACKEND LOGIC (NEW FIXED COMPLETE) =================
+        document.getElementById('res-clear-btn').addEventListener('click', () => {
+            document.getElementById('add-result-form').reset();
+            document.getElementById('res-stu-id').readOnly = false;
+            document.getElementById('res-id').value = '';
+            document.getElementById('res-submit-btn').innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> সেভ করুন';
+        });
+
+        document.getElementById('add-result-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('res-submit-btn');
+            const isUpdating = document.getElementById('res-id').value ? true : false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> সেভ হচ্ছে...';
+            submitBtn.disabled = true;
+
+            const sId = document.getElementById('res-stu-id').value.trim();
+            const monthVal = document.getElementById('res-month').value;
+            
+            let rId = document.getElementById('res-id').value;
+            if (!rId) rId = 'RES-' + sId + '-' + monthVal;
+
+            // শিক্ষার্থীর ইনফরমেশন খুঁজে বের করা (যদি স্টুডেন্ট লিস্টে থাকে)
+            const studentInfo = currentStudentsData[sId] || { name: "অনিবন্ধিত শিক্ষার্থী (" + sId + ")", photoUrl: "" };
+
+            const data = {
+                id: sId,
+                name: studentInfo.name,
+                photoUrl: studentInfo.photoUrl,
+                month: monthVal,
+                class: document.getElementById('res-class').value,
+                className: classNamesBn[document.getElementById('res-class').value] + " শ্রেণি",
+                gpa: document.getElementById('res-gpa').value.trim(),
+                totalMarks: document.getElementById('res-total').value.trim(),
+                timestamp: Date.now()
+            };
+
+            set(ref(db, 'results/' + rId), data).then(() => {
+                document.getElementById('res-clear-btn').click();
+                submitBtn.disabled = false;
+                if(isUpdating) showSuccessPopup("শিক্ষার্থীর ফলাফল সফলভাবে আপডেট হয়েছে!");
+                else showSuccessPopup("শিক্ষার্থীর ফলাফল সফলভাবে ডিরেক্টরিতে যুক্ত হয়েছে!");
+            }).catch((err) => {
+                console.error(err);
+                submitBtn.disabled = false;
+                alert("দুঃখিত, রেজাল্ট সেভ করার সময় ত্রুটি ঘটেছে।");
+            });
+        });
+
+        function fetchResults() {
+            onValue(ref(db, 'results'), (snapshot) => {
+                const emptyState = document.getElementById('res-empty-state');
+                const tableContainer = document.getElementById('res-table-container');
+                const list = document.getElementById('admin-results-list');
+                const totalCount = document.getElementById('res-total-count');
+
+                if (snapshot.exists()) {
+                    emptyState.classList.add('hidden');
+                    tableContainer.classList.remove('hidden');
+                    list.innerHTML = '';
+                    currentResultsData = snapshot.val(); 
+                    let count = 0;
+
+                    Object.keys(currentResultsData).reverse().forEach(rId => {
+                        const res = currentResultsData[rId];
+                        count++;
+                        const monthNameBn = res.month === 'june-2026' ? 'জুন ২০২৬' : 'মে ২০২৬';
+
+                        list.innerHTML += `
+                            <tr class="hover:bg-indigo-50/30 transition res-row">
+                                <td class="py-3 px-6 flex items-center gap-3">
+                                    <img src="${res.photoUrl || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/149/149071.png'" class="w-10 h-10 rounded-full object-cover border border-gray-200">
+                                    <div>
+                                        <p class="font-bold text-gray-800 res-name-col">${res.name}</p>
+                                        <p class="text-[11px] text-gray-500">মোট নম্বর: ${res.totalMarks}</p>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-6 font-semibold text-indigo-700 res-id-col">${res.id}</td>
+                                <td class="py-3 px-6">
+                                    <span class="bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded text-xs font-bold">${monthNameBn}</span>
+                                    <span class="bg-emerald-50 text-[#0B4A2B] px-2 py-0.5 rounded text-xs font-bold ml-1">${classNamesBn[res.class]}</span>
+                                    <span class="ml-2 font-bold text-amber-600">GPA: ${res.gpa}</span>
+                                </td>
+                                <td class="py-3 px-6 text-center">
+                                    <button class="res-edit text-blue-500 bg-blue-50 p-1.5 rounded hover:bg-blue-500 hover:text-white mr-1" data-id="${rId}"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="res-copy text-indigo-600 bg-indigo-50 p-1.5 rounded hover:bg-indigo-600 hover:text-white mr-1" data-id="${rId}"><i class="fa-solid fa-copy"></i></button>
+                                    <button class="res-del text-red-500 bg-red-50 p-1.5 rounded hover:bg-red-500 hover:text-white" data-id="${rId}"><i class="fa-solid fa-trash-can"></i></button>
+                                </td>
+                            </tr>`;
+                    });
+                    totalCount.innerText = count + ' টি';
+                    attachResultListeners();
+                } else {
+                    emptyState.classList.remove('hidden');
+                    tableContainer.classList.add('hidden');
+                    totalCount.innerText = '০ টি';
+                }
+            });
+        }
+
+        function attachResultListeners() {
+            document.querySelectorAll('.res-del').forEach(btn => btn.addEventListener('click', (e) => {
+                const id = e.currentTarget.getAttribute('data-id');
+                askDeleteConfirmation(ref(db, 'results/' + id), `আপনি কি নিশ্চিত যে স্টুডেন্ট আইডি: ${id.split('-')[1]}-এর ফলাফল চিরতরে ডিলিট করতে চান?`);
+            }));
+            document.querySelectorAll('.res-edit').forEach(btn => btn.addEventListener('click', (e) => {
+                const id = e.currentTarget.getAttribute('data-id');
+                const data = currentResultsData[id];
+                document.getElementById('res-id').value = id;
+                document.getElementById('res-stu-id').value = data.id;
+                document.getElementById('res-stu-id').readOnly = true;
+                document.getElementById('res-month').value = data.month;
+                document.getElementById('res-class').value = data.class;
+                document.getElementById('res-gpa').value = data.gpa;
+                document.getElementById('res-total').value = data.totalMarks;
+                document.getElementById('res-submit-btn').innerHTML = '<i class="fa-solid fa-pen-to-square"></i> আপডেট করুন';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }));
+            document.querySelectorAll('.res-copy').forEach(btn => btn.addEventListener('click', (e) => {
+                const id = e.currentTarget.getAttribute('data-id');
+                const data = currentResultsData[id];
+                document.getElementById('res-id').value = '';
+                document.getElementById('res-stu-id').value = '';
+                document.getElementById('res-stu-id').readOnly = false;
+                document.getElementById('res-stu-id').focus();
+                document.getElementById('res-month').value = data.month;
+                document.getElementById('res-class').value = data.class;
+                document.getElementById('res-gpa').value = data.gpa;
+                document.getElementById('res-total').value = data.totalMarks;
+                document.getElementById('res-submit-btn').innerHTML = '<i class="fa-solid fa-copy"></i> কপি সেভ করুন';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }));
+        }
+
+        document.getElementById('res-search-input').addEventListener('keyup', (e) => {
+            const term = e.target.value.toLowerCase();
+            document.querySelectorAll('.res-row').forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(term) ? '' : 'none';
             });
         });
     </script>

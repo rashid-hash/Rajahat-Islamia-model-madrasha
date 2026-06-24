@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>মাসিক মূল্যায়ন ফলাফল | রাজারহাট ইসলামিয়া মডেল মাদ্রাসা</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Hind Siliguri', sans-serif; background-color: #F8FAFC; }
+    </style>
+</head>
+<body>
+
+    <header class="bg-[#0B4A2B] text-white py-4 shadow-lg">
+    <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="text-center md:text-left">
+            <h1 class="text-2xl font-bold"><i class="fa-solid fa-square-poll-vertical mr-2"></i> মাসিক মূল্যায়ন ফলাফল</h1>
+        </div>
+
+        <div class="flex items-center gap-6 bg-white/10 px-6 py-2 rounded-full border border-white/20 backdrop-blur-sm">
+            <div class="flex items-center gap-2 border-r border-white/20 pr-6">
+                <i class="fa-solid fa-calendar-days text-white"></i>
+                <span id="date-display" class="font-semibold tracking-wide">০০/০০/০০০০</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-clock text-white"></i>
+                <span id="clock-display" class="font-mono font-bold tracking-widest text-lg">০০:০০:০০</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8">
+        
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <select id="filter-month" class="w-full p-3 border rounded-xl bg-gray-50 focus:ring-2 focus:ring-[#0B4A2B]">
+                    <option value="">মাস নির্বাচন করুন</option>
+                    <option value="june-2026">জুন ২০২৬</option>
+                    <option value="may-2026">মে ২০২৬</option>
+                    <option value="april-2026">এপ্রিল ২০২৬</option>
+                </select>
+                <select id="filter-class" class="w-full p-3 border rounded-xl bg-gray-50 focus:ring-2 focus:ring-[#0B4A2B]">
+                    <option value="">শ্রেণি নির্বাচন করুন</option>
+                    <option value="one">প্রথম শ্রেণি</option>
+                    <option value="two">দ্বিতীয় শ্রেণি</option>
+                    <option value="three">তৃতীয় শ্রেণি</option>
+                    <option value="four">চতুর্থ শ্রেণি</option>
+                    <option value="five">পঞ্চম শ্রেণি</option>
+                    <option value="six">ষষ্ঠ শ্রেণি</option>
+                    <option value="seven">সপ্তম শ্রেণি</option>
+                    <option value="eight">অষ্টম শ্রেণি</option>
+                    <option value="nine">নবম শ্রেণি</option>
+                    <option value="ten">দশম শ্রেণি</option>
+                </select>
+                <button class="bg-[#0B4A2B] text-white font-bold rounded-xl hover:bg-[#07331D] transition">
+                    <i class="fa-solid fa-magnifying-glass mr-2"></i> ফলাফল খুঁজুন
+                </button>
+            </div>
+        </div>
+
+        <div id="result-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-5 rounded-2xl shadow-md border-l-8 border-[#D4AF37] hover:shadow-lg transition">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="https://ui-avatars.com/api/?name=Abdullah&background=random" class="w-14 h-14 rounded-full">
+                    <div>
+                        <h3 class="text-lg font-bold">আব্দুল্লাহ আল নোমান</h3>
+                        <p class="text-sm text-gray-500">আইডি: ২৬০০১ | শ্রেণি: দশম</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-sm">
+                    <div class="bg-gray-50 p-2 rounded">মোট নম্বর: <span class="font-bold">৪৫০</span></div>
+                    <div class="bg-gray-50 p-2 rounded">জিপিএ: <span class="font-bold text-[#0B4A2B]">৫.০০</span></div>
+                </div>
+                <button class="w-full mt-4 py-2 border border-[#0B4A2B] text-[#0B4A2B] font-bold rounded-lg hover:bg-[#0B4A2B] hover:text-white transition">
+                    <i class="fa-solid fa-file-pdf mr-2"></i> বিস্তারিত দেখুন
+                </button>
+            </div>
+        </div>
+
+    </main>
+    <!-- ================= FOOTER SECTION ================= -->
+    <footer class="bg-[#07331D] text-gray-300 pt-16 pb-6 border-t-4 border-[#D4AF37] mt-12">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-8 mb-12">
+                
+                <!-- 1. মাদরাসা সম্পর্কে -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-book-quran text-2xl text-[#D4AF37]"></i>
+                        <h2 class="text-xl font-bold text-white tracking-wide">রাজারহাট মডেল মাদ্রাসা</h2>
+                    </div>
+                    <p class="text-sm leading-relaxed text-justify mt-4">
+                        দ্বীনি ও আধুনিক শিক্ষার এক অপূর্ব সমন্বয়। আমাদের লক্ষ্য প্রতিটি শিক্ষার্থীকে সৎ, যোগ্য এবং আদর্শ নাগরিক হিসেবে গড়ে তোলা।
+                    </p>
+                    <div class="flex gap-4 mt-6">
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#0B4A2B] flex items-center justify-center text-white hover:bg-[#D4AF37] hover:text-[#0B4A2B] transition shadow-md"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#0B4A2B] flex items-center justify-center text-white hover:bg-[#D4AF37] hover:text-[#0B4A2B] transition shadow-md"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#0B4A2B] flex items-center justify-center text-white hover:bg-[#D4AF37] hover:text-[#0B4A2B] transition shadow-md"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- 2. গুরুত্বপূর্ণ লিংক -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6 relative inline-block">
+                        গুরুত্বপূর্ণ লিংক
+                        <span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-[#D4AF37]"></span>
+                    </h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="index.html" class="hover:text-[#D4AF37] transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-[#D4AF37]"></i> মূল পাতা (Home)</a></li>
+                        <li><a href="students.html" class="hover:text-[#D4AF37] transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-[#D4AF37]"></i> শিক্ষার্থী ডিরেক্টরি</a></li>
+                        <li><a href="teachers.html" class="hover:text-[#D4AF37] transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-[#D4AF37]"></i> শিক্ষক ও স্টাফ</a></li>
+                        <li><a href="#" class="hover:text-[#D4AF37] transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-[#D4AF37]"></i> সকল নোটিশ</a></li>
+                    </ul>
+                </div>
+
+                <!-- 3. যোগাযোগের তথ্য -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6 relative inline-block">
+                        যোগাযোগ
+                        <span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-[#D4AF37]"></span>
+                    </h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1 text-[#D4AF37]"></i>
+                            <span>মাদরাসা রোড, রাজারহাট,<br>কুড়িগ্রাম, বাংলাদেশ।</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-[#D4AF37]"></i>
+                            <span>+৮৮০ ১৭০০-০০০০০০</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-[#D4AF37]"></i>
+                            <span>info@rajarhatmadrasa.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright Bar -->
+            <div class="border-t border-gray-600/50 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-gray-400">
+                <p>&copy; ২০২৬ রাজারহাট ইসলামিয়া মডেল মাদ্রাসা। সর্বস্বত্ব সংরক্ষিত।</p>
+                <p>কারিগরি সহযোগিতায়: <span class="text-[#D4AF37] font-semibold cursor-pointer hover:underline">rashid-hash</span></p>
+            </div>
+        </div>
+    </footer>
+    <script>
+    function updateClockAndDate() {
+        const now = new Date();
+
+        // ১. ক্যালেন্ডার (বাংলাদেশী ফরম্যাট)
+        const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        const dateString = now.toLocaleDateString('bn-BD', dateOptions);
+        document.getElementById('date-display').innerText = dateString;
+
+        // ২. ডিজিটাল ঘড়ি (২৪ ঘণ্টা ফরম্যাট)
+        const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+        const timeString = now.toLocaleTimeString('bn-BD', timeOptions);
+        
+        // বাংলা ডিজিট নিশ্চিত করা
+        const banglaDigits = { '০':'০', '১':'১', '২':'২', '৩':'৩', '৪':'৪', '৫':'৫', '৬':'৬', '৭':'৭', '৮':'৮', '৯':'৯', ':':':' };
+        const banglaTime = timeString.replace(/[0-9:]/g, w => banglaDigits[w] || w);
+        
+        document.getElementById('clock-display').innerText = banglaTime;
+    }
+
+    setInterval(updateClockAndDate, 1000);
+    updateClockAndDate();
+</script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+    // আপনার Firebase Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyA5rw6zSgRauNURUOmiXiVs-foRYjRTBOo",
+        authDomain: "rajarhat-islamia-model-mad.firebaseapp.com",
+        projectId: "rajarhat-islamia-model-mad",
+        storageBucket: "rajarhat-islamia-model-mad.firebasestorage.app",
+        messagingSenderId: "563719183379",
+        appId: "1:563719183379:web:bb5d0f05eec1263b62b3e6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const resultContainer = document.getElementById('result-container');
+    const monthFilter = document.getElementById('filter-month');
+    const classFilter = document.getElementById('filter-class');
+
+    // রেজাল্ট লোড করার ফাংশন
+    function fetchResults() {
+        const resultsRef = ref(db, 'results');
+        
+        onValue(resultsRef, (snapshot) => {
+            resultContainer.innerHTML = ''; 
+            
+            if (snapshot.exists()) {
+                const results = snapshot.val();
+                let hasResults = false;
+                
+                Object.keys(results).reverse().forEach(key => {
+                    const res = results[key];
+                    
+                    const matchMonth = (monthFilter.value === "" || res.month === monthFilter.value);
+                    const matchClass = (classFilter.value === "" || res.class === classFilter.value);
+
+                    if (matchMonth && matchClass) {
+                        hasResults = true;
+                        renderResultCard(res);
+                    }
+                });
+
+                if(!hasResults) {
+                    resultContainer.innerHTML = `<div class="col-span-full py-10 text-center text-gray-500 font-semibold"><i class="fa-solid fa-box-open text-3xl mb-2 text-gray-300 block"></i>এই ফিল্টারে কোনো ফলাফল পাওয়া যায়নি।</div>`;
+                }
+            } else {
+                resultContainer.innerHTML = `<div class="col-span-full py-10 text-center text-gray-500 font-semibold">বর্তমানে কোনো ফলাফল পাওয়া যায়নি।</div>`;
+            }
+        });
+    }
+
+    // কার্ড রেন্ডার করার ফাংশন
+    function renderResultCard(res) {
+        // একটি সুন্দর ডিফল্ট প্রোফাইল ছবির লিংক
+        const defaultImg = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+        
+        // অত্যন্ত কড়াকড়িভাবে ছবির লিংক চেক করা (যাতে কোনোভাবেই ছবি না ভাঙে)
+        let finalImageUrl = (res.photoUrl && res.photoUrl.trim() !== "" && res.photoUrl !== "undefined") ? res.photoUrl : defaultImg;
+
+        const card = `
+            <div class="bg-white p-5 rounded-2xl shadow-md border-l-8 border-[#0B4A2B] hover:shadow-xl transition">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="${finalImageUrl}" onerror="this.onerror=null; this.src='${defaultImg}';" class="w-14 h-14 rounded-full object-cover border border-gray-200 shadow-sm bg-gray-50">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800">${res.name || 'শিক্ষার্থী'}</h3>
+                        <p class="text-[12px] font-semibold text-gray-500 mt-0.5">আইডি: <span class="text-[#0B4A2B]">${res.id}</span> | ${res.className || 'শ্রেণি উল্লেখ নেই'}</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-sm">
+                    <div class="bg-gray-50 p-2 rounded border border-gray-100 text-gray-600">মোট নম্বর: <span class="font-bold text-gray-800">${res.totalMarks}</span></div>
+                    <div class="bg-emerald-50 p-2 rounded border border-emerald-100 text-gray-600">জিপিএ: <span class="font-bold text-[#0B4A2B]">${res.gpa}</span></div>
+                </div>
+                <button class="w-full mt-4 py-2 bg-gray-50 border border-gray-200 text-gray-600 font-bold rounded-lg hover:bg-[#0B4A2B] hover:border-[#0B4A2B] hover:text-white transition flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-file-pdf"></i> বিস্তারিত দেখুন
+                </button>
+            </div>
+        `;
+        resultContainer.insertAdjacentHTML('beforeend', card);
+    }
+
+    // ফিল্টার বাটনে ক্লিক করলে রেজাল্ট ফিল্টার হবে
+    document.querySelector('button').addEventListener('click', fetchResults);
+
+    // পেজ লোড হলে রেজাল্ট দেখাবে
+    fetchResults();
+</script>
+
+</body>
+</html>

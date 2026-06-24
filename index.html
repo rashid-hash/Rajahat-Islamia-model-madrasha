@@ -16,7 +16,7 @@
             font-family: 'Hind Siliguri', sans-serif; 
             background-color: #F8FAFC; 
         }
-        .arabic-theme { background-color: #0B4A2B; } /* গাঢ় ইসলামিক সবুজ */
+        .arabic-theme { background-color: #0B4A2B; } /* গাঢ় ইসলামিক সবুজ */
         .gold-accent { color: #D4AF37; } /* সোনালী আভা */
         .gold-hover:hover { color: #D4AF37; transition: 0.3s ease; }
         .gold-border:focus { 
@@ -28,6 +28,7 @@
 </head>
 <body>
 
+<!-- Sticky Header Section -->
 <!-- Sticky Header Section -->
 <header class="arabic-theme text-white sticky top-0 z-50 shadow-lg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,13 +46,19 @@
             <nav class="hidden lg:flex space-x-6 text-[16px] font-semibold">
                 <a href="#" class="gold-hover text-yellow-400">হোম</a>
                 <a href="#" class="gold-hover">মাদরাসা রেজাল্ট</a>
-                <a href="#" class="gold-hover">মাসিক মূল্যায়ন</a>
+                <a href="results.html" class="gold-hover text-yellow-400">মাসিক মূল্যায়ন</a>
                 <a href="#" class="gold-hover">ভর্তি</a>
                 <a href="#" class="gold-hover">নোটিশ</a>
             </nav>
 
-            <!-- Login Button (Desktop) -->
-            <div class="hidden lg:block">
+            <!-- Clock & Login Button (Desktop) -->
+            <div class="hidden lg:flex items-center gap-4">
+                <!-- Digital Clock -->
+                <div class="bg-[#07331D] text-[#D4AF37] px-3 py-1.5 rounded border border-[#D4AF37]/30 flex items-center gap-2 font-mono shadow-inner cursor-default" title="বাংলাদেশ সময় (২৪ ঘন্টা)">
+                    <i class="fa-regular fa-clock"></i>
+                    <span id="desktop-clock" class="text-lg font-bold tracking-widest mt-0.5">০০:০০:০০</span>
+                </div>
+                <!-- Login Button -->
                 <button class="bg-[#D4AF37] text-[#0B4A2B] px-5 py-2 rounded-md font-bold hover:bg-yellow-500 transition shadow-md">
                     <i class="fa-solid fa-user-lock mr-2"></i>লগইন
                 </button>
@@ -68,10 +75,16 @@
 
     <!-- Mobile Responsive Menu Panel -->
     <div id="mobile-menu" class="hidden lg:hidden bg-[#07331D] border-t border-emerald-800 transition-all duration-300">
-        <div class="px-4 pt-2 pb-4 space-y-2 font-semibold">
+        <div class="px-4 pt-4 pb-4 space-y-2 font-semibold">
+            <!-- Mobile Digital Clock -->
+            <div class="bg-[#0B4A2B] text-[#D4AF37] py-2.5 rounded border border-[#D4AF37]/30 flex items-center justify-center gap-2 font-mono mb-4 shadow-inner">
+                <i class="fa-regular fa-clock"></i>
+                <span id="mobile-clock" class="text-xl font-bold tracking-widest mt-0.5">০০:০০:০০</span>
+            </div>
+            
             <a href="#" class="block py-2 px-3 rounded hover:bg-[#0B4A2B] text-yellow-400">হোম</a>
             <a href="#" class="block py-2 px-3 rounded hover:bg-[#0B4A2B] gold-hover">গুরুত্বপূর্ণ ঘোষণা</a>
-            <a href="#" class="block py-2 px-3 rounded hover:bg-[#0B4A2B] gold-hover">মাসিক মূল্যায়ন</a>
+            <a href="results.html" class="block py-2 px-3 rounded hover:bg-[#0B4A2B] gold-hover">মাসিক মূল্যায়ন</a>
             <a href="#" class="block py-2 px-3 rounded hover:bg-[#0B4A2B] gold-hover">সাম্প্রতিক আপডেট</a>
             <a href="#" class="block py-2 px-3 rounded hover:bg-[#0B4A2B] gold-hover">নোটিশবোর্ড</a>
             <hr class="border-emerald-800 my-2">
@@ -82,35 +95,26 @@
     </div>
 </header>
 
-<!-- Hero Slider / Image Section (Search bar moved inside here) -->
+<!-- Hero Slider / Image Section -->
 <section class="relative bg-gray-900 text-white h-[400px] sm:h-[450px] md:h-[500px] flex flex-col items-center justify-center">
-    <!-- Background Image -->
     <div class="absolute inset-0 bg-cover bg-center opacity-40" style="background-image: url('https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&q=80&w=1200');"></div>
-    <!-- Gradient Overlay -->
     <div class="absolute inset-0 bg-gradient-to-t from-[#0B4A2B]/80 via-transparent to-black/50"></div>
 
-    <!-- Floating Search Bar (Perfectly positioned over the image, below the header) -->
+    <!-- Floating Search Bar -->
     <div class="absolute top-6 sm:top-10 w-full z-40 flex flex-col items-center px-4">
-    <div class="bg-white p-1.5 sm:p-2 rounded-full shadow-2xl flex items-center w-full max-w-2xl border border-gray-100">
-        <div class="text-gray-400 px-3 sm:px-4">
-            <i class="fa-solid fa-magnifying-glass text-sm sm:text-base"></i>
+        <div class="bg-white p-1.5 sm:p-2 rounded-full shadow-2xl flex items-center w-full max-w-2xl border border-gray-100">
+            <div class="text-gray-400 px-3 sm:px-4"><i class="fa-solid fa-magnifying-glass text-sm sm:text-base"></i></div>
+            <input type="text" id="search-input" placeholder="শিক্ষার্থীর রোল নম্বর লিখুন (যেমন: 101)..." class="w-full px-1 sm:px-2 py-1.5 sm:py-2 text-sm sm:text-base text-gray-700 rounded-full gold-border bg-transparent focus:outline-none">
+            <button id="search-btn" class="bg-[#0B4A2B] text-white px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base rounded-full hover:bg-[#083b22] transition font-semibold ml-2 shadow-sm whitespace-nowrap">খুঁজুন</button>
         </div>
-        <input type="text" id="search-input" placeholder="শিক্ষার্থীর রোল নম্বর লিখুন (যেমন: 101)..." class="w-full px-1 sm:px-2 py-1.5 sm:py-2 text-sm sm:text-base text-gray-700 rounded-full gold-border bg-transparent focus:outline-none">
-        
-        <button id="search-btn" class="bg-[#0B4A2B] text-white px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base rounded-full hover:bg-[#083b22] transition font-semibold ml-2 shadow-sm whitespace-nowrap">
-            খুঁজুন
-        </button>
+        <div id="search-result-container" class="hidden mt-4 w-full max-w-2xl bg-white p-4 rounded-xl shadow-2xl border-t-4 border-[#D4AF37] text-gray-800 text-left transition-all duration-300"></div>
     </div>
-
-    <div id="search-result-container" class="hidden mt-4 w-full max-w-2xl bg-white p-4 rounded-xl shadow-2xl border-t-4 border-[#D4AF37] text-gray-800 text-left transition-all duration-300">
-        </div>
-</div>
 
     <!-- Hero Content -->
     <div class="relative z-10 text-center px-4 max-w-4xl mt-12 sm:mt-16">
         <span class="text-sm sm:text-lg gold-accent font-bold tracking-widest block mb-2">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span>
-        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">দ্বীনি ও আধুনিক শিক্ষার এক অপূর্ব সমন্বয়</h2>
-        <p class="text-xs sm:text-base md:text-lg text-gray-200 max-w-2xl mx-auto mb-6">আমাদের লক্ষ্য প্রতিটি শিক্ষার্থীকে সৎ, যোগ্য এবং আদর্শ নাগরিক হিসেবে গড়ে তোলা।</p>
+        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">দ্বীনি ও আধুনিক শিক্ষার এক অপূর্ব সমন্বয়</h2>
+        <p class="text-xs sm:text-base md:text-lg text-gray-200 max-w-2xl mx-auto mb-6">আমাদের লক্ষ্য প্রতিটি শিক্ষার্থীকে সৎ, যোগ্য এবং আদর্শ নাগরিক হিসেবে গড়ে তোলা।</p>
         <div class="flex justify-center gap-4">
             <a href="#" class="bg-[#D4AF37] text-[#0B4A2B] px-5 py-2.5 rounded text-sm sm:text-base font-bold hover:bg-yellow-500 transition shadow-md">অনলাইন ভর্তি</a>
             <a href="#" class="border border-white hover:bg-white hover:text-black px-5 py-2.5 rounded text-sm sm:text-base font-semibold transition">আমাদের সম্পর্কে</a>
@@ -118,10 +122,9 @@
     </div>
 </section>
 
-<!-- Quick Stats / Information Cards -->
+<!-- Quick Stats -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-30">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        
         <a href="students.html" class="bg-white p-5 rounded-xl shadow-md border-b-4 border-[#0B4A2B] flex items-center gap-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group cursor-pointer">
             <div class="p-3 bg-emerald-50 text-[#0B4A2B] rounded-lg text-2xl group-hover:bg-[#0B4A2B] group-hover:text-white transition-colors"><i class="fa-solid fa-users"></i></div>
             <div>
@@ -129,7 +132,6 @@
                 <p class="text-xs text-gray-500 group-hover:text-[#0B4A2B] transition-colors">শিক্ষার্থী তথ্য দেখুন <i class="fa-solid fa-arrow-right text-[10px] ml-1 opacity-0 group-hover:opacity-100 transition-opacity"></i></p>
             </div>
         </a>
-
         <a href="teachers.html" class="bg-white p-5 rounded-xl shadow-md border-b-4 border-[#D4AF37] flex items-center gap-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group cursor-pointer">
             <div class="p-3 bg-amber-50 text-[#D4AF37] rounded-lg text-2xl group-hover:bg-[#D4AF37] group-hover:text-white transition-colors"><i class="fa-solid fa-user-tie"></i></div>
             <div>
@@ -137,89 +139,57 @@
                 <p class="text-xs text-gray-500 group-hover:text-[#D4AF37] transition-colors">শিক্ষক তালিকা <i class="fa-solid fa-arrow-right text-[10px] ml-1 opacity-0 group-hover:opacity-100 transition-opacity"></i></p>
             </div>
         </a>
-
-        <a href="results.html" class="bg-white p-5 rounded-xl shadow-md border-b-4 border-[#0B4A2B] flex items-center gap-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group cursor-pointer">
+        <a href="#" class="bg-white p-5 rounded-xl shadow-md border-b-4 border-[#0B4A2B] flex items-center gap-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group cursor-pointer">
             <div class="p-3 bg-emerald-50 text-[#0B4A2B] rounded-lg text-2xl group-hover:bg-[#0B4A2B] group-hover:text-white transition-colors"><i class="fa-solid fa-graduation-cap"></i></div>
             <div>
                 <h3 class="text-xl font-bold text-gray-800">৯৮.৫%</h3>
                 <p class="text-xs text-gray-500 group-hover:text-[#0B4A2B] transition-colors">ফলাফল দেখুন <i class="fa-solid fa-arrow-right text-[10px] ml-1 opacity-0 group-hover:opacity-100 transition-opacity"></i></p>
             </div>
         </a>
-
-        <a href="campus.html" class="bg-white p-5 rounded-xl shadow-md border-b-4 border-[#D4AF37] flex items-center gap-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group cursor-pointer">
+        <a href="#" class="bg-white p-5 rounded-xl shadow-md border-b-4 border-[#D4AF37] flex items-center gap-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group cursor-pointer">
             <div class="p-3 bg-amber-50 text-[#D4AF37] rounded-lg text-2xl group-hover:bg-[#D4AF37] group-hover:text-white transition-colors"><i class="fa-solid fa-mosque"></i></div>
             <div>
                 <h3 class="text-xl font-bold text-gray-800">৩টি</h3>
                 <p class="text-xs text-gray-500 group-hover:text-[#D4AF37] transition-colors">ক্যাম্পাস ট্যুর <i class="fa-solid fa-arrow-right text-[10px] ml-1 opacity-0 group-hover:opacity-100 transition-opacity"></i></p>
             </div>
         </a>
-
     </div>
 </section>
+
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
+        <!-- ================= NOTICE BOARD ================= -->
         <div class="lg:col-span-2 bg-white rounded-xl shadow-md border-t-4 border-[#0B4A2B] overflow-hidden">
             <div class="bg-gray-50 px-6 py-4 border-b flex justify-between items-center">
                 <h2 class="text-xl font-bold text-gray-800"><i class="fa-solid fa-bullhorn text-[#D4AF37] mr-2"></i>সাম্প্রতিক নোটিশ</h2>
                 <a href="#" class="text-sm text-[#0B4A2B] font-semibold hover:text-[#D4AF37] transition">সকল নোটিশ <i class="fa-solid fa-arrow-right ml-1"></i></a>
             </div>
             
-            <div class="p-6 space-y-4">
-                <div class="flex items-start gap-4 p-3 hover:bg-emerald-50 rounded-lg transition border border-transparent hover:border-emerald-100 group">
-                    <div class="bg-[#0B4A2B] text-white text-center rounded-md min-w-[60px] p-2 shadow-sm">
-                        <span class="block text-xl font-bold leading-none">১৯</span>
-                        <span class="block text-xs mt-1">জুন, ২০২৬</span>
-                    </div>
-                    <div>
-                        <a href="#" class="text-base sm:text-lg font-semibold text-gray-800 group-hover:text-[#0B4A2B] transition leading-tight">পবিত্র ঈদুল আযহা ও গ্রীষ্মকালীন ছুটি উপলক্ষে মাদরাসা বন্ধ থাকার নোটিশ</a>
-                        <p class="text-xs text-gray-500 mt-1"><i class="fa-regular fa-clock mr-1"></i>প্রকাশিত হয়েছে: সকাল ১০:৩০ মিনিট</p>
-                    </div>
-                </div>
-
-                <div class="flex items-start gap-4 p-3 hover:bg-emerald-50 rounded-lg transition border border-transparent hover:border-emerald-100 group">
-                    <div class="bg-[#0B4A2B] text-white text-center rounded-md min-w-[60px] p-2 shadow-sm">
-                        <span class="block text-xl font-bold leading-none">১৫</span>
-                        <span class="block text-xs mt-1">জুন, ২০২৬</span>
-                    </div>
-                    <div>
-                        <h3 class="flex items-center gap-2">
-                            <a href="#" class="text-base sm:text-lg font-semibold text-gray-800 group-hover:text-[#0B4A2B] transition leading-tight">ষান্মাসিক (অর্ধ-বার্ষিক) পরীক্ষার রুটিন প্রকাশ প্রসঙ্গে</a>
-                            <span class="bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full animate-pulse">নতুন</span>
-                        </h3>
-                        <p class="text-xs text-gray-500 mt-1"><i class="fa-regular fa-clock mr-1"></i>প্রকাশিত হয়েছে: দুপুর ২:১৫ মিনিট</p>
-                    </div>
-                </div>
-
-                <div class="flex items-start gap-4 p-3 hover:bg-emerald-50 rounded-lg transition border border-transparent hover:border-emerald-100 group">
-                    <div class="bg-gray-500 text-white text-center rounded-md min-w-[60px] p-2 shadow-sm">
-                        <span class="block text-xl font-bold leading-none">১০</span>
-                        <span class="block text-xs mt-1">জুন, ২০২৬</span>
-                    </div>
-                    <div>
-                        <a href="#" class="text-base sm:text-lg font-semibold text-gray-600 group-hover:text-[#0B4A2B] transition leading-tight">হিফজ বিভাগের নতুন শিক্ষাবর্ষের ভর্তি কার্যক্রম শুরু</a>
-                        <p class="text-xs text-gray-500 mt-1"><i class="fa-regular fa-clock mr-1"></i>প্রকাশিত হয়েছে: বিকাল ৪:০০ মিনিট</p>
-                    </div>
+            <!-- Dynamic Notice Container -->
+            <div id="live-notice-board" class="p-6 space-y-4">
+                <!-- Loading State -->
+                <div class="py-10 text-center text-gray-400">
+                    <i class="fa-solid fa-spinner fa-spin text-3xl text-[#0B4A2B] mb-3"></i>
+                    <p class="text-sm font-semibold">নোটিশ লোড হচ্ছে...</p>
                 </div>
             </div>
         </div>
 
-        <div class="space-y-6">
-            <div class="bg-white rounded-xl shadow-md border-t-4 border-[#D4AF37] overflow-hidden">
+        <div class="bg-white rounded-xl shadow-md border-t-4 border-[#D4AF37] overflow-hidden">
                 <div class="bg-gray-50 px-6 py-4 border-b">
                     <h2 class="text-xl font-bold text-gray-800"><i class="fa-solid fa-link text-[#0B4A2B] mr-2"></i>গুরুত্বপূর্ণ লিংক</h2>
                 </div>
                 <div class="p-4">
-                    <ul class="space-y-2">
-                        <li><a href="#" class="flex items-center p-2 text-gray-700 hover:text-[#0B4A2B] hover:bg-gray-50 rounded transition"><i class="fa-solid fa-angle-right text-[#D4AF37] mr-3"></i>একাডেমিক ক্যালেন্ডার ২০২৬</a></li>
-                        <li><a href="#" class="flex items-center p-2 text-gray-700 hover:text-[#0B4A2B] hover:bg-gray-50 rounded transition"><i class="fa-solid fa-angle-right text-[#D4AF37] mr-3"></i>শিক্ষকদের তালিকা ও রুটিন</a></li>
-                        <li><a href="#" class="flex items-center p-2 text-gray-700 hover:text-[#0B4A2B] hover:bg-gray-50 rounded transition"><i class="fa-solid fa-angle-right text-[#D4AF37] mr-3"></i>অনলাইন ভর্তি ফর্ম</a></li>
-                        <li><a href="#" class="flex items-center p-2 text-gray-700 hover:text-[#0B4A2B] hover:bg-gray-50 rounded transition"><i class="fa-solid fa-angle-right text-[#D4AF37] mr-3"></i>বেতন ও ফি জমাদানের নিয়মাবলী</a></li>
+                    <ul class="space-y-2" id="dynamic-links-container">
+                        <li class="text-center text-gray-400 py-4">
+                            <i class="fa-solid fa-spinner fa-spin mr-2"></i>লোড হচ্ছে...
+                        </li>
                     </ul>
                 </div>
             </div>
 
-            <a href="#" class="flex items-center justify-center gap-3 w-full bg-[#0B4A2B] text-white py-4 rounded-xl hover:bg-[#083b22] transition shadow-md group">
+            <a href="#" id="dynamic-prospectus-btn" target="_blank" class="flex items-center justify-center gap-3 w-full bg-[#0B4A2B] text-white py-4 rounded-xl hover:bg-[#083b22] transition shadow-md group">
                 <i class="fa-solid fa-file-pdf text-2xl text-[#D4AF37] group-hover:animate-bounce"></i>
                 <div class="text-left">
                     <span class="block font-bold text-lg leading-none">প্রসপেক্টাস ডাউনলোড</span>
@@ -227,19 +197,10 @@
                 </div>
             </a>
         </div>
-
     </div>
 </section>
 
-<!-- Mobile Menu Dynamic Toggle Script -->
-<script>
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    menuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
-</script>
+<!-- Photo Gallery -->
 <section class="bg-white py-12 border-t border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-10">
@@ -257,53 +218,48 @@
                     <p class="text-white font-semibold p-4 border-l-4 border-[#D4AF37] ml-4 mb-4">মাদরাসা ক্যাম্পাস</p>
                 </div>
             </div>
-
             <div class="relative overflow-hidden rounded-xl shadow-sm group cursor-pointer aspect-[4/3]">
-                <img src="https://images.unsplash.com/photo-1609599006353-e629aaab31ce?auto=format&fit=crop&q=80&w=800" alt="পবিত্র কুরআন তিলাওয়াত" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                <img src="https://images.unsplash.com/photo-1609599006353-e629aaab31ce?auto=format&fit=crop&q=80&w=800" alt="পবিত্র কুরআন তিলাওয়াত" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end">
                     <p class="text-white font-semibold p-4 border-l-4 border-[#D4AF37] ml-4 mb-4">হিফজ বিভাগের ক্লাস</p>
                 </div>
             </div>
-
             <div class="relative overflow-hidden rounded-xl shadow-sm group cursor-pointer aspect-[4/3]">
                 <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800" alt="লাইব্রেরি" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end">
                     <p class="text-white font-semibold p-4 border-l-4 border-[#D4AF37] ml-4 mb-4">বিশাল লাইব্রেরি</p>
                 </div>
             </div>
-            
             <div class="relative overflow-hidden rounded-xl shadow-sm group cursor-pointer aspect-[4/3]">
                 <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800" alt="পুরস্কার বিতরণী" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end">
                     <p class="text-white font-semibold p-4 border-l-4 border-[#D4AF37] ml-4 mb-4">বার্ষিক পুরস্কার বিতরণী</p>
                 </div>
             </div>
-
             <div class="relative overflow-hidden rounded-xl shadow-sm group cursor-pointer aspect-[4/3] sm:col-span-2 md:col-span-2">
-                <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&q=80&w=1200" alt="দোয়া মাহফিল" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&q=80&w=1200" alt="দোয়া মাহফিল" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end">
-                    <p class="text-white font-semibold p-4 border-l-4 border-[#D4AF37] ml-4 mb-4">বার্ষিক ওয়াজ ও দোয়া মাহফিল</p>
+                    <p class="text-white font-semibold p-4 border-l-4 border-[#D4AF37] ml-4 mb-4">বার্ষিক ওয়াজ ও দোয়া মাহফিল</p>
                 </div>
             </div>
         </div>
-        
         <div class="text-center mt-8">
             <button class="border-2 border-[#0B4A2B] text-[#0B4A2B] px-6 py-2 rounded-full font-bold hover:bg-[#0B4A2B] hover:text-white transition">আরও ছবি দেখুন</button>
         </div>
     </div>
 </section>
 
+<!-- Footer -->
 <footer class="bg-[#07331D] text-gray-300 pt-16 pb-6 border-t-4 border-[#D4AF37]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
-            
             <div class="space-y-4">
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-book-quran text-2xl text-[#D4AF37]"></i>
                     <h2 class="text-xl font-bold text-white tracking-wide">রাজারহাট মডেল মাদ্রাসা</h2>
                 </div>
                 <p class="text-sm leading-relaxed text-justify mt-4">
-                    দ্বীনি ও আধুনিক শিক্ষার এক অপূর্ব সমন্বয়। আমাদের লক্ষ্য প্রতিটি শিক্ষার্থীকে সৎ, যোগ্য এবং আদর্শ নাগরিক হিসেবে গড়ে তোলা।
+                    দ্বীনি ও আধুনিক শিক্ষার এক অপূর্ব সমন্বয়। আমাদের লক্ষ্য প্রতিটি শিক্ষার্থীকে সৎ, যোগ্য এবং আদর্শ নাগরিক হিসেবে গড়ে তোলা।
                 </p>
                 <div class="flex gap-4 mt-6">
                     <a href="#" class="w-10 h-10 rounded-full bg-[#0B4A2B] flex items-center justify-center text-white hover:bg-[#D4AF37] hover:text-[#0B4A2B] transition"><i class="fa-brands fa-facebook-f"></i></a>
@@ -311,12 +267,8 @@
                     <a href="#" class="w-10 h-10 rounded-full bg-[#0B4A2B] flex items-center justify-center text-white hover:bg-[#D4AF37] hover:text-[#0B4A2B] transition"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
             </div>
-
             <div>
-                <h3 class="text-lg font-bold text-white mb-6 relative inline-block">
-                    গুরুত্বপূর্ণ লিংক
-                    <span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-[#D4AF37]"></span>
-                </h3>
+                <h3 class="text-lg font-bold text-white mb-6 relative inline-block">গুরুত্বপূর্ণ লিংক<span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-[#D4AF37]"></span></h3>
                 <ul class="space-y-3 text-sm">
                     <li><a href="#" class="hover:text-[#D4AF37] transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-[#D4AF37]"></i> মাদরাসা সম্পর্কে</a></li>
                     <li><a href="#" class="hover:text-[#D4AF37] transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-[#D4AF37]"></i> শিক্ষক ও স্টাফ</a></li>
@@ -325,117 +277,324 @@
                     <li><a href="#" class="hover:text-[#D4AF37] transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2 text-[#D4AF37]"></i> গ্যালারি ও ভিডিও</a></li>
                 </ul>
             </div>
-
             <div>
-                <h3 class="text-lg font-bold text-white mb-6 relative inline-block">
-                    যোগাযোগ
-                    <span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-[#D4AF37]"></span>
-                </h3>
+                <h3 class="text-lg font-bold text-white mb-6 relative inline-block">যোগাযোগ<span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-[#D4AF37]"></span></h3>
                 <ul class="space-y-4 text-sm">
-                    <li class="flex items-start gap-3">
-                        <i class="fa-solid fa-location-dot mt-1 text-[#D4AF37]"></i>
-                        <span>মাদরাসা রোড, রাজারহাট,<br>কুড়িগ্রাম, বাংলাদেশ।</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <i class="fa-solid fa-phone text-[#D4AF37]"></i>
-                        <span>+৮৮০ ১৭০০-০০০০০০</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <i class="fa-solid fa-envelope text-[#D4AF37]"></i>
-                        <span>info@rajarhatmadrasa.com</span>
-                    </li>
+                    <li class="flex items-start gap-3"><i class="fa-solid fa-location-dot mt-1 text-[#D4AF37]"></i><span>মাদরাসা রোড, রাজারহাট,<br>কুড়িগ্রাম, বাংলাদেশ।</span></li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-phone text-[#D4AF37]"></i><span>+৮৮০ ১৭০০-০০০০০০</span></li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-envelope text-[#D4AF37]"></i><span>info@rajarhatmadrasa.com</span></li>
                 </ul>
             </div>
-
             <div>
-                <h3 class="text-lg font-bold text-white mb-6 relative inline-block">
-                    আপডেট পান
-                    <span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-[#D4AF37]"></span>
-                </h3>
+                <h3 class="text-lg font-bold text-white mb-6 relative inline-block">আপডেট পান<span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-[#D4AF37]"></span></h3>
                 <p class="text-sm mb-4">মাদরাসার নতুন নোটিশ ও আপডেট সরাসরি পেতে ইমেইল সাবস্ক্রাইব করুন।</p>
                 <form class="flex">
                     <input type="email" placeholder="আপনার ইমেইল..." class="w-full px-3 py-2 text-gray-800 bg-white rounded-l outline-none text-sm">
-                    <button type="button" class="bg-[#D4AF37] text-[#0B4A2B] px-4 py-2 rounded-r font-bold hover:bg-yellow-500 transition">
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
+                    <button type="button" class="bg-[#D4AF37] text-[#0B4A2B] px-4 py-2 rounded-r font-bold hover:bg-yellow-500 transition"><i class="fa-solid fa-paper-plane"></i></button>
                 </form>
             </div>
-
         </div>
-
         <div class="border-t border-gray-600/50 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-gray-400">
             <p>&copy; ২০২৬ রাজারহাট ইসলামিয়া মডেল মাদ্রাসা। সর্বস্বত্ব সংরক্ষিত।</p>
-            <p>কারিগরি সহযোগিতায়: <span class="text-[#D4AF37] font-semibold cursor-pointer hover:underline">Abdur Rashid</span></p>
+            <p>কারিগরি সহযোগিতায়: <span class="text-[#D4AF37] font-semibold cursor-pointer hover:underline">rashid-hash</span></p>
         </div>
     </div>
 </footer>
-<script type="module">
-    // 1. Import Firebase Modular SDK
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-    // 2. Your Firebase Configuration (Replace with your actual config)
+<!-- Mobile Menu Dynamic Toggle Script -->
+<script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+</script>
+
+<!-- Firebase Backend Script -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref, get, child, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+    // Your Firebase Configuration
     const firebaseConfig = {
         apiKey: "AIzaSyA5rw6zSgRauNURUOmiXiVs-foRYjRTBOo",
-  authDomain: "rajarhat-islamia-model-mad.firebaseapp.com",
-  projectId: "rajarhat-islamia-model-mad",
-  storageBucket: "rajarhat-islamia-model-mad.firebasestorage.app",
-  messagingSenderId: "563719183379",
-  appId: "1:563719183379:web:bb5d0f05eec1263b62b3e6"
+        authDomain: "rajarhat-islamia-model-mad.firebaseapp.com",
+        projectId: "rajarhat-islamia-model-mad",
+        storageBucket: "rajarhat-islamia-model-mad.firebasestorage.app",
+        messagingSenderId: "563719183379",
+        appId: "1:563719183379:web:bb5d0f05eec1263b62b3e6",
+        measurementId: "G-1TSLJR0C4Q"
     };
 
-    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-    const dbRef = ref(getDatabase(app));
+    const db = getDatabase(app);
+    const dbRef = ref(db);
 
-    // 3. DOM Elements
+    // ==========================================
+    // 1. Student Result Search Logic (আগের মতোই থাকবে)
+    // ==========================================
     const searchInput = document.getElementById('search-input');
     const searchBtn = document.getElementById('search-btn');
     const resultContainer = document.getElementById('search-result-container');
 
-    // 4. Search Function
     searchBtn.addEventListener('click', () => {
         const rollNumber = searchInput.value.trim();
-        
-        if(rollNumber === "") {
-            alert("অনুগ্রহ করে একটি রোল নম্বর লিখুন!");
-            return;
-        }
-
-        // Show loading state
+        if(rollNumber === "") { alert("অনুগ্রহ করে একটি রোল নম্বর লিখুন!"); return; }
         resultContainer.classList.remove('hidden');
-        resultContainer.innerHTML = `<div class="flex justify-center items-center"><i class="fa-solid fa-spinner fa-spin text-2xl text-[#0B4A2B]"></i> <span class="ml-2">খোঁজা হচ্ছে...</span></div>`;
+        resultContainer.innerHTML = `<div class="flex justify-center items-center"><i class="fa-solid fa-spinner fa-spin text-2xl text-[#0B4A2B]"></i> <span class="ml-2 font-semibold">খোঁজা হচ্ছে...</span></div>`;
 
-        // Fetch data from Firebase Realtime Database
         get(child(dbRef, `students/${rollNumber}`)).then((snapshot) => {
             if (snapshot.exists()) {
                 const data = snapshot.val();
-                // Inject result HTML
                 resultContainer.innerHTML = `
                     <h3 class="text-lg font-bold text-[#0B4A2B] border-b pb-2 mb-3"><i class="fa-solid fa-user-graduate mr-2 text-[#D4AF37]"></i>শিক্ষার্থীর তথ্য</h3>
                     <div class="grid grid-cols-2 gap-2 text-sm sm:text-base">
                         <p><span class="font-bold text-gray-600">নাম:</span> ${data.name}</p>
-                        <p><span class="font-bold text-gray-600">রোল:</span> ${rollNumber}</p>
-                        <p><span class="font-bold text-gray-600">বিভাগ:</span> ${data.class}</p>
-                        <p><span class="font-bold text-gray-600">ফলাফল:</span> <span class="text-green-600 font-bold">${data.result}</span></p>
-                        <p class="col-span-2"><span class="font-bold text-gray-600">স্ট্যাটাস:</span> ${data.status}</p>
-                    </div>
-                `;
+                        <p><span class="font-bold text-gray-600">আইডি:</span> ${rollNumber}</p>
+                        <p class="col-span-2"><span class="font-bold text-gray-600">ঠিকানা:</span> ${data.address}</p>
+                    </div>`;
             } else {
-                // If roll number not found
-                resultContainer.innerHTML = `
-                    <div class="text-center text-red-500 py-2">
-                        <i class="fa-solid fa-circle-exclamation text-2xl mb-2"></i>
-                        <p class="font-semibold">দুঃখিত! এই রোল নম্বরের কোনো তথ্য পাওয়া যায়নি।</p>
-                    </div>
-                `;
+                resultContainer.innerHTML = `<div class="text-center text-red-500 py-2"><i class="fa-solid fa-circle-exclamation text-2xl mb-2"></i><p class="font-semibold">দুঃখিত! এই রোল নম্বরের কোনো তথ্য পাওয়া যায়নি।</p></div>`;
             }
         }).catch((error) => {
             console.error(error);
-            resultContainer.innerHTML = `<p class="text-red-500 text-center">সার্ভার এরর! দয়া করে আবার চেষ্টা করুন।</p>`;
+            resultContainer.innerHTML = `<p class="text-red-500 text-center font-bold">সার্ভার এরর! দয়া করে আবার চেষ্টা করুন।</p>`;
         });
     });
+
+    // ==========================================
+    // 2. Dynamic Notice Board & Modal Logic
+    // ==========================================
+    const noticeContainer = document.getElementById('live-notice-board');
+    const modal = document.getElementById('notice-modal');
+
+    // Fetch Notices
+    onValue(ref(db, 'notices'), (snapshot) => {
+        if (snapshot.exists()) {
+            noticeContainer.innerHTML = ''; 
+            const noticesData = snapshot.val();
+            const sortedIds = Object.keys(noticesData).sort((a, b) => noticesData[b].timestamp - noticesData[a].timestamp);
+
+            sortedIds.slice(0, 4).forEach(nId => {
+                const not = noticesData[nId];
+                const newBadge = not.isNew === 'yes' ? `<span class="bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full animate-pulse whitespace-nowrap shadow-sm">নতুন</span>` : '';
+                
+                // এখানে data-desc অ্যাট্রিবিউটে বিস্তারিত তথ্য যুক্ত করা হয়েছে
+                const noticeHtml = `
+                    <div class="notice-card flex items-start gap-4 p-3 hover:bg-emerald-50 rounded-lg transition border border-transparent hover:border-emerald-100 group cursor-pointer" 
+                         data-title="${not.title.replace(/"/g, '&quot;')}" 
+                         data-desc="${(not.desc || 'বিস্তারিত কোনো তথ্য দেওয়া হয়নি।').replace(/"/g, '&quot;')}" 
+                         data-date="${not.day} ${not.month}" 
+                         data-time="${not.time}">
+                        <div class="bg-[#0B4A2B] text-white text-center rounded-md min-w-[60px] p-2 shadow-sm">
+                            <span class="block text-xl font-bold leading-none">${not.day}</span>
+                            <span class="block text-xs mt-1 truncate">${not.month}</span>
+                        </div>
+                        <div>
+                            <h3 class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                                <a href="javascript:void(0)" class="text-base sm:text-lg font-semibold text-gray-800 group-hover:text-[#0B4A2B] transition leading-tight">${not.title}</a>
+                                ${newBadge}
+                            </h3>
+                            <p class="text-xs text-gray-500 mt-1"><i class="fa-regular fa-clock mr-1"></i>প্রকাশিত হয়েছে: ${not.time}</p>
+                        </div>
+                    </div>
+                `;
+                noticeContainer.insertAdjacentHTML('beforeend', noticeHtml);
+            });
+        } else {
+            noticeContainer.innerHTML = `<div class="py-10 text-center text-gray-500 font-semibold">বর্তমানে কোনো নোটিশ নেই।</div>`;
+        }
+    });
+
+    // ==========================================
+    // 3. Dynamic Important Links Logic
+    // ==========================================
+    const linksContainer = document.getElementById('dynamic-links-container');
+    
+    if (linksContainer) {
+        onValue(ref(db, 'links'), (snapshot) => {
+            if (snapshot.exists()) {
+                linksContainer.innerHTML = ''; 
+                const linksData = snapshot.val();
+                
+                // সিরিয়াল অনুযায়ী সাজানো
+                const sortedIds = Object.keys(linksData).sort((a, b) => linksData[a].timestamp - linksData[b].timestamp);
+
+                sortedIds.forEach(lId => {
+                    const link = linksData[lId];
+                    const linkHtml = `
+                        <li>
+                            <a href="${link.url}" target="_blank" class="flex items-center p-2 text-gray-700 hover:text-[#0B4A2B] hover:bg-gray-50 rounded transition group">
+                                <i class="fa-solid fa-angle-right text-[#D4AF37] mr-3 group-hover:translate-x-1 transition-transform"></i>${link.title}
+                            </a>
+                        </li>
+                    `;
+                    linksContainer.insertAdjacentHTML('beforeend', linkHtml);
+                });
+            } else {
+                linksContainer.innerHTML = `<li class="text-center text-gray-500 py-4">কোনো লিংক পাওয়া যায়নি।</li>`;
+            }
+        });
+        
+    }
+    
+    // 3. Modal Open Logic
+    document.addEventListener('click', function(e) {
+        const card = e.target.closest('.notice-card');
+        if (card) {
+            e.preventDefault();
+            // কার্ড থেকে ডেটা নেওয়া
+            const title = card.getAttribute('data-title');
+            const date = card.getAttribute('data-date');
+            const time = card.getAttribute('data-time');
+            const desc = card.getAttribute('data-desc'); // বিস্তারিত ডেটা
+
+            // মডালে ডেটা বসানো
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-date').innerHTML = `<i class="fa-regular fa-calendar-days text-[#D4AF37] mr-2"></i> ${date}`;
+            document.getElementById('modal-time').innerHTML = `<i class="fa-regular fa-clock text-[#D4AF37] mr-2"></i> ${time}`;
+            
+            // বিস্তারিত বিবরণ বসানো (innerText ব্যবহার করা হয়েছে যাতে লাইন ব্রেকগুলো ঠিক থাকে)
+            document.getElementById('modal-desc').innerText = desc;
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+    });
+
+    // 4. Modal Close Logic
+    function closeModal() {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+    document.getElementById('close-modal-btn').addEventListener('click', closeModal);
+    document.getElementById('close-modal-btn-bottom').addEventListener('click', closeModal);
+    
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) { closeModal(); }
+    });
+
+    // ==========================================
+    // 4. Dynamic Prospectus Link & Custom Alert Logic
+    // ==========================================
+    
+    // কাস্টম ওয়ার্নিং পপ-আপ কন্ট্রোল ফাংশন
+    const warningPopup = document.getElementById('warning-popup');
+    const closeWarningBtn = document.getElementById('close-warning-btn');
+
+    function showWarningPopup(message) {
+        document.getElementById('warning-popup-message').innerText = message;
+        warningPopup.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // ব্যাকগ্রাউন্ড স্ক্রল বন্ধ
+    }
+
+    closeWarningBtn.addEventListener('click', () => {
+        warningPopup.classList.add('hidden');
+        document.body.style.overflow = 'auto'; // ব্যাকগ্রাউন্ড স্ক্রল চালু
+    });
+
+    // প্রসপেক্টাস লিংক আপডেট লজিক
+    const prospectusBtn = document.getElementById('dynamic-prospectus-btn');
+    
+    if(prospectusBtn) {
+        onValue(ref(db, 'settings/prospectus'), (snapshot) => {
+            if (snapshot.exists() && snapshot.val().url !== "") {
+                prospectusBtn.href = snapshot.val().url;
+                prospectusBtn.onclick = null; // ক্লিক ইভেন্ট ক্লিয়ার করা
+            } else {
+                prospectusBtn.href = "javascript:void(0)"; // পেজ রিলোড বন্ধ করা
+                // সাধারণ alert এর পরিবর্তে আমাদের কাস্টম পপ-আপ
+                prospectusBtn.onclick = () => showWarningPopup("দুঃখিত, মাদরাসার প্রসপেক্টাস এখনো যুক্ত করা হয়নি। অনুগ্রহ করে পরে আবার চেষ্টা করুন!");
+            }
+        });
+    }
 </script>
+<!-- Digital Clock Script -->
+<script>
+    function updateBangladeshClock() {
+        const now = new Date();
+        
+        // ২৪ ঘণ্টা ফরম্যাটে শুধুমাত্র বাংলাদেশ টাইমজোন (Asia/Dhaka) বের করা
+        const options = { 
+            timeZone: 'Asia/Dhaka', 
+            hour12: false, 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            second: '2-digit' 
+        };
+        const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
+        
+        // ইংরেজি ডিজিটগুলোকে বাংলায় রূপান্তর করা
+        const banglaDigits = { '0':'০', '1':'১', '2':'২', '3':'৩', '4':'৪', '5':'৫', '6':'৬', '7':'৭', '8':'৮', '9':'৯' };
+        const banglaTime = timeString.replace(/[0-9]/g, w => banglaDigits[w]);
+
+        // ডেস্কটপ ও মোবাইলের ঘড়িতে সময় বসানো
+        const desktopClock = document.getElementById('desktop-clock');
+        const mobileClock = document.getElementById('mobile-clock');
+        
+        if (desktopClock) desktopClock.innerText = banglaTime;
+        if (mobileClock) mobileClock.innerText = banglaTime;
+    }
+
+    // প্রতি ১ সেকেন্ড (১০০০ মিলিসেকেন্ড) পর পর ঘড়ি আপডেট হবে
+    setInterval(updateBangladeshClock, 1000);
+    updateBangladeshClock(); // পেজ লোড হওয়ার সাথে সাথে একবার কল করা
+</script>
+</script>
+<!-- ================= NOTICE MODAL (POP-UP) ================= -->
+<div id="notice-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 transition-opacity">
+    <div class="bg-white rounded-2xl w-full max-w-xl shadow-2xl transform transition-transform border-t-4 border-[#0B4A2B] overflow-hidden">
+        
+        <!-- Modal Header -->
+        <div class="bg-gray-50 px-6 py-4 flex justify-between items-center border-b border-gray-100">
+            <h3 class="font-bold text-[#0B4A2B] flex items-center gap-2 text-lg">
+                <i class="fa-solid fa-bell text-[#D4AF37] animate-ring"></i> নোটিশ বিস্তারিত
+            </h3>
+            <button id="close-modal-btn" class="text-gray-400 hover:text-red-500 hover:bg-red-50 w-8 h-8 rounded-full transition flex items-center justify-center">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- Modal Body -->
+        <div class="p-6 sm:p-8">
+            <div class="flex flex-wrap items-center gap-4 mb-4 text-xs sm:text-sm text-gray-500 font-semibold bg-emerald-50/50 p-3 rounded-lg border border-emerald-100/50">
+                <span id="modal-date" class="flex items-center"><i class="fa-regular fa-calendar-days text-[#D4AF37] mr-2"></i> --</span>
+                <span class="text-gray-300 hidden sm:inline">|</span>
+                <span id="modal-time" class="flex items-center"><i class="fa-regular fa-clock text-[#D4AF37] mr-2"></i> --</span>
+            </div>
+            
+            <h2 id="modal-title" class="text-xl sm:text-2xl font-bold text-gray-800 leading-snug mb-4">
+                --
+            </h2>
+            
+            <div id="modal-desc" class="text-gray-600 text-sm sm:text-base leading-relaxed whitespace-pre-wrap border-l-4 border-gray-200 pl-4">
+                এই নোটিশটির বিস্তারিত তথ্য এখানে দেখানো হবে। (যেহেতু বর্তমানে এডমিন প্যানেল থেকে শুধুমাত্র শিরোনাম প্রকাশ করা হয়েছে, তাই এটিই মূল নোটিশ হিসেবে গণ্য হবে।)
+            </div>
+        </div>
+        
+        <!-- Modal Footer -->
+        <div class="bg-gray-50 px-6 py-4 border-t border-gray-100 text-right">
+            <button id="close-modal-btn-bottom" class="bg-[#0B4A2B] text-white px-6 py-2 rounded-full font-bold hover:bg-[#07331D] transition shadow-md">
+                বুঝতে পেরেছি
+            </button>
+        </div>
+    </div>
+</div>
+<div id="warning-popup" class="hidden fixed inset-0 z-[150] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 transition-opacity">
+    <div class="bg-white rounded-2xl w-full max-w-sm shadow-2xl transform scale-95 transition-transform border-b-8 border-[#D4AF37] overflow-hidden text-center p-6 relative">
+        
+        <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-amber-50 border-4 border-amber-500/30 mb-4 animate-pulse">
+            <i class="fa-solid fa-circle-exclamation text-4xl text-amber-500"></i>
+        </div>
+        
+        <h3 class="text-xl font-bold text-gray-800 mb-2">দুঃখিত!</h3>
+        <p id="warning-popup-message" class="text-gray-600 text-sm font-medium mb-6">
+            এই তথ্যটি এখনো যুক্ত করা হয়নি।
+        </p>
+        
+        <button id="close-warning-btn" class="w-full bg-[#0B4A2B] text-white py-2.5 rounded-xl font-bold hover:bg-[#07331D] active:scale-[0.98] transition shadow-md tracking-wide">
+            ঠিক আছে
+        </button>
+    </div>
+</div>
 
 </body>
 </html>
